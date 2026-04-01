@@ -175,37 +175,6 @@
             line-height: 1.7;
         }
 
-        /* ---- Options Grid (check-in / checkout) ---- */
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1px;
-            background: var(--border);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-            margin: 1.5rem 0;
-        }
-        .option {
-            background: var(--surface);
-            padding: 1.25rem;
-            cursor: pointer;
-            transition: background 0.15s;
-        }
-        .option:hover { background: var(--bg); }
-        .option.selected { background: var(--accent-bg); }
-        .option-label {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 0.2rem;
-        }
-        .option-desc {
-            font-size: 0.8rem;
-            color: var(--text-3);
-            line-height: 1.5;
-        }
-
         /* ---- Gambling Cycle Chain ---- */
         .chain {
             display: flex;
@@ -379,6 +348,37 @@
         }
         .stage-detail p + p { margin-top: 0.75rem; }
 
+        /* ---- Numbered Steps ---- */
+        .steps { margin: 1.5rem 0; }
+        .step {
+            display: flex;
+            gap: 1rem;
+            align-items: baseline;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .step:last-child { border-bottom: none; }
+        .step-num {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-3);
+            flex-shrink: 0;
+            width: 1.5rem;
+            text-align: right;
+        }
+        .step-content { flex: 1; }
+        .step-q {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .step-hint {
+            font-size: 0.82rem;
+            color: var(--text-3);
+            margin-top: 0.15rem;
+            line-height: 1.6;
+        }
+
         /* ---- Discussion Questions ---- */
         .questions { margin: 1.5rem 0; }
         .question {
@@ -450,7 +450,6 @@
             .chain-step, .stage-step { border-right: none; border-bottom: 1px solid var(--border); }
             .chain-step:last-child, .stage-step:last-child { border-bottom: none; }
             .chain-detail, .stage-detail { border-radius: 0 0 8px 8px; }
-            .options-grid { grid-template-columns: 1fr; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -501,37 +500,35 @@
             </p>
         </div>
 
-        <div class="callout">
-            <p>
-                <strong>Pass is always available.</strong> On any question, any round, at any point.
-                No explanation needed. Being here is enough.
-            </p>
-        </div>
-
         <hr class="divider">
 
         <div class="section-label">Check-in</div>
-        <h2><span class="timing">5 to 8 min</span>Getting into it</h2>
+        <h2><span class="timing">8 to 10 min</span>Getting into it</h2>
         <p class="body-text" style="margin-top: 0.25rem;">
-            Share your name and one of the following. Or pass.
+            Share your name, then answer each of these. A sentence or two is fine.
         </p>
 
-        <div class="options-grid">
-            <div class="option" onclick="select(this)">
-                <div class="option-label">One word</div>
-                <div class="option-desc">How you're feeling about being here today</div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <div class="step-q">What's going on for you today?</div>
+                    <div class="step-hint">Not gambling-specific. Just where your head is at walking in.</div>
+                </div>
             </div>
-            <div class="option" onclick="select(this)">
-                <div class="option-label">Something that brought you here</div>
-                <div class="option-desc">Even vaguely. No details needed.</div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <div class="step-q">When was the last time gambling crossed your mind?</div>
+                    <div class="step-hint">A thought, an urge, a memory, seeing an ad. Whatever it was.</div>
+                </div>
             </div>
-            <div class="option" onclick="select(this)">
-                <div class="option-label">Where you think you land</div>
-                <div class="option-desc">With your gambling right now, in your own words</div>
-            </div>
-            <div class="option" onclick="select(this)">
-                <div class="option-label">Pass</div>
-                <div class="option-desc">You're here. That counts.</div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <div class="step-q">What do you want to get out of today?</div>
+                    <div class="step-hint">Understanding, connection, something specific. Say what's true.</div>
+                </div>
             </div>
         </div>
 
@@ -760,7 +757,7 @@
         <h2><span class="timing">20 to 25 min</span>Open it up</h2>
         <p class="body-text">
             These questions are starting points. Take them wherever feels useful.
-            No answer is wrong. Pass is always an option.
+            No answer is wrong. Take them wherever feels useful.
         </p>
 
         <div class="questions">
@@ -803,24 +800,29 @@
 
         <div class="section-label">Closing</div>
         <h2><span class="timing">5 to 7 min</span>One last round</h2>
-        <p class="body-text">Share your name and one of the following, or pass.</p>
+        <p class="body-text">Answer each of these before you go.</p>
 
-        <div class="options-grid">
-            <div class="option" onclick="select(this)">
-                <div class="option-label">One word</div>
-                <div class="option-desc">How you're leaving today</div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <div class="step-q">What's one thing from today that stuck with you?</div>
+                    <div class="step-hint">Something you heard, something you recognized, something that surprised you.</div>
+                </div>
             </div>
-            <div class="option" onclick="select(this)">
-                <div class="option-label">Something I noticed</div>
-                <div class="option-desc">About myself or my patterns, today</div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <div class="step-q">What's one thing you want to pay attention to this week?</div>
+                    <div class="step-hint">A trigger, a pattern, a situation. Something concrete.</div>
+                </div>
             </div>
-            <div class="option" onclick="select(this)">
-                <div class="option-label">One thing to think about</div>
-                <div class="option-desc">Something worth sitting with after today</div>
-            </div>
-            <div class="option" onclick="select(this)">
-                <div class="option-label">Pass</div>
-                <div class="option-desc">You're here, and that's enough</div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <div class="step-q">How are you leaving compared to how you walked in?</div>
+                    <div class="step-hint">Different, the same, heavier, lighter. Whatever is honest.</div>
+                </div>
             </div>
         </div>
 
@@ -879,10 +881,6 @@
         header.closest('.acc-item').classList.toggle('open');
     }
 
-    function select(el) {
-        el.closest('.options-grid').querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
-        el.classList.add('selected');
-    }
 </script>
 </body>
 </html>
