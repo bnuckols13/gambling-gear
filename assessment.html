@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GEAR Assessment — Gambling Evaluation and Reduction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --text:       #1C1917;
+    --text-2:     #57534E;
+    --text-3:     #A8A29E;
+    --accent:     #9A6B2C;
+    --accent-bg:  #FAF3EA;
+    --cool:       #3B7A5A;
+    --cool-bg:    #EDF5F0;
+    --border:     #E7E5E4;
+    --bg:         #FAFAF7;
+    --surface:    #FFFFFF;
+    --red:        #B45309;
+    --red-bg:     #FEF3C7;
+    --amber:      #D97706;
+    --amber-bg:   #FFFBEB;
+    --green:      #059669;
+    --green-bg:   #ECFDF5;
+    --yellow:     #CA8A04;
+    --yellow-bg:  #FEFCE8;
+    --radius:     8px;
+}
+
+body {
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+}
+
+body::before { content: ''; display: block; height: 3px; background: var(--accent); }
+
+/* ── Session Nav ── */
+.session-nav {
+    display: flex; justify-content: center; gap: 0.25rem;
+    padding: 0.6rem 1rem; background: var(--surface);
+    border-bottom: 1px solid var(--border); overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.session-nav a {
+    font-family: inherit; font-size: 0.78rem; font-weight: 500;
+    color: var(--text-3); text-decoration: none; padding: 0.4rem 0.7rem;
+    border-radius: 6px; white-space: nowrap; transition: all 0.15s;
+}
+.session-nav a:hover { color: var(--text-2); background: var(--bg); }
+.session-nav a.active {
+    color: var(--accent); font-weight: 600;
+    background: var(--accent-bg); border: 1px solid rgba(154,107,44,0.2);
+}
+
+/* ── Layout ── */
+.container { max-width: 620px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+/* ── Welcome Screen ── */
+.screen { display: none; }
+.screen.active { display: block; animation: appear 0.3s ease; }
+@keyframes appear { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.welcome-card {
+    text-align: center; padding: 3rem 2rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+.welcome-label {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;
+}
+.welcome-card h1 {
+    font-size: 1.8rem; font-weight: 700; line-height: 1.2;
+    letter-spacing: -0.02em; margin-bottom: 0.5rem;
+}
+.welcome-card .subtitle { font-size: 0.95rem; color: var(--text-2); margin-bottom: 2rem; }
+.welcome-card .conf {
+    font-size: 0.82rem; color: var(--text-3); line-height: 1.7;
+    border-top: 1px solid var(--border); padding-top: 1.5rem; margin-top: 1.5rem;
+    text-align: left;
+}
+
+.start-btn {
+    display: inline-block; padding: 0.85rem 3rem;
+    background: var(--text); color: var(--surface); border: none;
+    border-radius: var(--radius); font-family: inherit;
+    font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    transition: all 0.15s;
+}
+.start-btn:hover { background: var(--text-2); }
+
+/* ── Progress ── */
+.progress-bar {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(250,250,247,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border); padding: 0.75rem 1.5rem;
+}
+.progress-inner { max-width: 620px; margin: 0 auto; }
+.progress-steps {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0.5rem; margin-bottom: 0.5rem;
+}
+.progress-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--border); transition: all 0.3s;
+}
+.progress-dot.done { background: var(--accent); }
+.progress-dot.current { background: var(--accent); width: 24px; border-radius: 4px; }
+.progress-label {
+    text-align: center; font-size: 0.75rem; font-weight: 500;
+    color: var(--text-3); letter-spacing: 0.05em;
+}
+.progress-track {
+    height: 2px; background: var(--border); border-radius: 1px;
+    margin-top: 0.4rem; max-width: 620px; margin-left: auto; margin-right: auto;
+}
+.progress-fill {
+    height: 100%; background: var(--accent); border-radius: 1px;
+    transition: width 0.4s cubic-bezier(0.22,1,0.36,1);
+}
+
+/* ── Question Screen ── */
+.question-area {
+    min-height: 50vh; display: flex; align-items: center;
+    justify-content: center; padding: 2rem 0;
+}
+.question-card { width: 100%; text-align: center; }
+.question-number {
+    font-size: 0.7rem; font-weight: 600; color: var(--text-3);
+    text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem;
+}
+.question-text {
+    font-size: 1.2rem; font-weight: 400; line-height: 1.6;
+    color: var(--text); margin-bottom: 2.5rem; min-height: 3rem;
+    transition: opacity 0.15s;
+}
+.question-text.fading { opacity: 0; }
+
+.answer-row {
+    display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;
+}
+.answer-btn {
+    min-width: 120px; padding: 0.85rem 1.25rem;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    background: var(--surface); color: var(--text);
+    font-family: inherit; font-size: 0.85rem; font-weight: 500;
+    cursor: pointer; transition: all 0.15s;
+}
+.answer-btn:hover {
+    border-color: var(--accent); color: var(--accent); background: var(--accent-bg);
+}
+.answer-btn.flash {
+    border-color: var(--accent); color: var(--surface);
+    background: var(--accent);
+}
+.answer-btn.yes-btn:hover { border-color: var(--cool); color: var(--cool); background: var(--cool-bg); }
+.answer-btn.yes-btn.flash { border-color: var(--cool); background: var(--cool); color: var(--surface); }
+.answer-btn.no-btn:hover { border-color: var(--text-3); color: var(--text-2); background: #F5F5F4; }
+.answer-btn.no-btn.flash { border-color: var(--text-3); background: var(--text-3); color: var(--surface); }
+
+.nav-row {
+    display: flex; justify-content: center; margin-top: 1.5rem; gap: 0.75rem;
+}
+.back-btn {
+    padding: 0.5rem 1rem; border: none; background: none;
+    font-family: inherit; font-size: 0.85rem; font-weight: 500;
+    color: var(--text-3); cursor: pointer; transition: color 0.15s;
+}
+.back-btn:hover { color: var(--text); }
+
+/* ── Gate Screen (BBGS all no) ── */
+.gate-card {
+    text-align: center; padding: 3rem 2rem;
+    background: var(--cool-bg); border: 1px solid rgba(59,122,90,0.2);
+    border-radius: var(--radius);
+}
+.gate-card h2 { font-size: 1.3rem; color: var(--cool); margin-bottom: 0.75rem; }
+.gate-card p { font-size: 0.95rem; color: var(--text-2); }
+
+/* ── Results Screen ── */
+.results-header {
+    text-align: center; margin-bottom: 2.5rem;
+}
+.results-header h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.3rem; }
+.results-header .subtitle { font-size: 0.9rem; color: var(--text-2); }
+
+.result-section {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem;
+}
+.result-section .section-label {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-3); margin-bottom: 0.75rem;
+}
+
+/* Severity badge */
+.severity-row { display: flex; align-items: center; gap: 1rem; }
+.severity-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.5rem 1rem; border-radius: 6px;
+    font-size: 0.9rem; font-weight: 600;
+}
+.severity-badge.green { background: var(--green-bg); color: var(--green); }
+.severity-badge.yellow { background: var(--yellow-bg); color: var(--yellow); }
+.severity-badge.amber { background: var(--amber-bg); color: var(--amber); }
+.severity-badge.red { background: var(--red-bg); color: var(--red); }
+.severity-score { font-size: 0.85rem; color: var(--text-3); }
+
+/* Bar charts */
+.bar-group { margin-top: 0.5rem; }
+.bar-item { margin-bottom: 0.75rem; }
+.bar-item:last-child { margin-bottom: 0; }
+.bar-label-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 0.3rem;
+}
+.bar-label { font-size: 0.85rem; font-weight: 500; color: var(--text); }
+.bar-label.primary { font-weight: 700; color: var(--accent); }
+.bar-value { font-size: 0.8rem; font-weight: 600; color: var(--text-3); font-variant-numeric: tabular-nums; }
+.bar-value.primary { color: var(--accent); }
+.bar-track {
+    height: 10px; background: #F0EDE8; border-radius: 5px; overflow: hidden;
+}
+.bar-fill {
+    height: 100%; border-radius: 5px; transition: width 0.8s cubic-bezier(0.22,1,0.36,1);
+    background: #C8C3BA;
+}
+.bar-fill.primary { background: var(--accent); }
+.bar-fill.pathway { background: #9ABFAB; }
+.bar-fill.pathway.primary { background: var(--cool); }
+
+/* Summary */
+.summary-text { font-size: 0.9rem; color: var(--text-2); line-height: 1.8; }
+.summary-text strong { color: var(--text); font-weight: 600; }
+
+/* Session links */
+.session-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.session-link {
+    display: inline-block; padding: 0.4rem 0.75rem;
+    background: var(--accent-bg); color: var(--accent);
+    border: 1px solid rgba(154,107,44,0.2); border-radius: 6px;
+    font-size: 0.8rem; font-weight: 500; text-decoration: none;
+    transition: all 0.15s;
+}
+.session-link:hover { background: var(--accent); color: var(--surface); }
+
+/* Copy button */
+.copy-row { text-align: center; margin-top: 2rem; }
+.copy-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.5rem; border: 1px solid var(--border);
+    border-radius: var(--radius); background: var(--surface);
+    font-family: inherit; font-size: 0.85rem; font-weight: 500;
+    color: var(--text-2); cursor: pointer; transition: all 0.15s;
+}
+.copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+.copy-btn.copied { border-color: var(--cool); color: var(--cool); background: var(--cool-bg); }
+
+/* Retake */
+.retake-row { text-align: center; margin-top: 1rem; }
+.retake-btn {
+    padding: 0.5rem 1rem; border: none; background: none;
+    font-family: inherit; font-size: 0.85rem; font-weight: 500;
+    color: var(--text-3); cursor: pointer;
+}
+.retake-btn:hover { color: var(--text); }
+
+/* ── Footer ── */
+.footer {
+    margin-top: 3rem; padding-top: 1.5rem;
+    border-top: 1px solid var(--border); text-align: center;
+    font-size: 0.8rem; color: var(--text-3); line-height: 1.8;
+}
+.footer strong { color: var(--text-2); font-weight: 600; }
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+    .container { padding: 1.5rem 1.25rem 3rem; }
+    .welcome-card { padding: 2rem 1.25rem; }
+    .welcome-card h1 { font-size: 1.5rem; }
+    .question-text { font-size: 1.05rem; }
+    .answer-row { flex-direction: column; align-items: center; }
+    .answer-btn { width: 100%; max-width: 300px; }
+    .severity-row { flex-direction: column; align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<nav class="session-nav">
+    <a href="index.html">Session 1</a>
+    <a href="session-2.html">Session 2</a>
+    <a href="session-3.html">Session 3</a>
+    <a href="session-4.html">Session 4</a>
+    <a href="session-5.html">Session 5</a>
+    <a href="session-6.html">Session 6</a>
+    <a href="session-7.html">Session 7</a>
+    <a href="session-8.html">Session 8</a>
+    <a href="session-9.html">Session 9</a>
+    <a href="session-10.html">Session 10</a>
+    <a href="assessment.html" class="active">Assessment</a>
+</nav>
+
+<div class="container">
+
+    <!-- ══════ WELCOME ══════ -->
+    <div id="welcome" class="screen active">
+        <div class="welcome-card">
+            <div class="welcome-label">GEAR Program</div>
+            <h1>Gambling Assessment</h1>
+            <p class="subtitle">Understand your relationship with gambling — honestly, without judgment.</p>
+            <button class="start-btn" onclick="startAssessment()">Begin Assessment</button>
+            <div class="conf">
+                <strong>About this assessment:</strong> This tool helps you and your counselor understand your gambling patterns, what function gambling serves for you, and what treatment approach fits best. It takes about 5-8 minutes. Your answers are not stored anywhere — they exist only in this browser session.
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════ ASSESSMENT ══════ -->
+    <div id="assessment" class="screen">
+        <div class="progress-bar">
+            <div class="progress-inner">
+                <div class="progress-steps">
+                    <div class="progress-dot" id="dot-0"></div>
+                    <div class="progress-dot" id="dot-1"></div>
+                    <div class="progress-dot" id="dot-2"></div>
+                    <div class="progress-dot" id="dot-3"></div>
+                </div>
+                <div class="progress-label" id="progress-label">Step 1 of 4 — Brief Screen</div>
+                <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+            </div>
+        </div>
+
+        <div class="question-area">
+            <div class="question-card">
+                <div class="question-number" id="q-number"></div>
+                <div class="question-text" id="q-text"></div>
+                <div class="answer-row" id="q-answers"></div>
+                <div class="nav-row">
+                    <button class="back-btn" id="back-btn" onclick="goBack()">← Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════ GATE (BBGS all no) ══════ -->
+    <div id="gate" class="screen">
+        <div class="gate-card">
+            <h2>No Indicators Identified</h2>
+            <p>Based on your responses, no gambling-related concerns were identified at this time. If your relationship with gambling changes, or if you have concerns in the future, this assessment is always available.</p>
+        </div>
+        <div class="retake-row" style="margin-top:1.5rem">
+            <button class="retake-btn" onclick="location.reload()">Take Again</button>
+        </div>
+    </div>
+
+    <!-- ══════ RESULTS ══════ -->
+    <div id="results" class="screen">
+        <div class="results-header">
+            <h1>Your GEAR Profile</h1>
+            <p class="subtitle">Assessment completed <span id="result-date"></span></p>
+        </div>
+
+        <!-- Severity -->
+        <div class="result-section">
+            <div class="section-label">Severity</div>
+            <div class="severity-row">
+                <div class="severity-badge" id="severity-badge"></div>
+                <div class="severity-score" id="severity-score"></div>
+            </div>
+        </div>
+
+        <!-- Function Profile -->
+        <div class="result-section">
+            <div class="section-label">What Gambling Does For You</div>
+            <div class="bar-group" id="function-bars"></div>
+        </div>
+
+        <!-- Pathway -->
+        <div class="result-section">
+            <div class="section-label">Your Pathway</div>
+            <div class="bar-group" id="pathway-bars"></div>
+        </div>
+
+        <!-- Clinical Summary -->
+        <div class="result-section">
+            <div class="section-label">What This Means</div>
+            <div class="summary-text" id="summary-text"></div>
+        </div>
+
+        <!-- Session Links -->
+        <div class="result-section">
+            <div class="section-label">Most Relevant Sessions For You</div>
+            <p class="summary-text" style="margin-bottom:0.5rem">Based on your profile, these GEAR sessions are especially relevant:</p>
+            <div class="session-links" id="session-links"></div>
+        </div>
+
+        <!-- Copy -->
+        <div class="copy-row">
+            <button class="copy-btn" id="copy-btn" onclick="copySummary()">
+                <span id="copy-icon">&#x2398;</span> Copy Clinical Summary
+            </button>
+        </div>
+        <div class="retake-row">
+            <button class="retake-btn" onclick="location.reload()">Retake Assessment</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <strong>Support is always available</strong><br>
+        National Problem Gambling Helpline: <strong>1-800-522-4700</strong> · Text: <strong>HELPLINE to 233777</strong><br>
+        Crisis Text Line: text HOME to 741741 · 988 Lifeline: call or text 988
+    </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+//  GEAR SCORING ENGINE + ASSESSMENT UI
+// ═══════════════════════════════════════════════════════════════
+
+// ── Item Banks ──────────────────────────────────────────────
+
+const BBGS = [
+    "Have you ever become restless, irritable, or anxious when trying to stop or cut down on gambling?",
+    "Have you tried to keep your family or friends from knowing how much you spent on gambling?",
+    "Have you had such financial trouble as a result of gambling that you had to get help with living expenses from family, friends, or welfare?"
+];
+
+const PGSI = [
+    "Have you bet more than you could really afford to lose?",
+    "Have you needed to gamble with larger amounts of money to get the same feeling of excitement?",
+    "When you gambled, did you go back another day to try to win back the money you lost?",
+    "Have you borrowed money or sold anything to get money to gamble?",
+    "Have you felt that you might have a problem with gambling?",
+    "Has gambling caused you any health problems, including stress or anxiety?",
+    "Have people criticized your betting or told you that you had a gambling problem, regardless of whether or not you thought it was true?",
+    "Has your gambling caused any financial problems for you or your household?",
+    "Have you felt guilty about the way you gamble or what happens when you gamble?"
+];
+
+const FUNCTIONAL = [
+    { text: "I gamble when I'm feeling stressed, anxious, or overwhelmed", fn: "escape" },
+    { text: "Gambling helps me forget about my problems for a while", fn: "escape" },
+    { text: "I gamble to escape feelings of sadness, loneliness, or emptiness", fn: "escape" },
+    { text: "When I'm gambling, I don't have to think about what's bothering me", fn: "escape" },
+    { text: "I gamble for the thrill and excitement of it", fn: "excitement" },
+    { text: "I enjoy the rush I get when I place a bet or make a play", fn: "excitement" },
+    { text: "The anticipation of whether I'll win or lose is part of the appeal", fn: "excitement" },
+    { text: "I get bored easily and gambling makes things more interesting", fn: "excitement" },
+    { text: "I gamble because my friends or social group does", fn: "social" },
+    { text: "Gambling is how I connect with certain people in my life", fn: "social" },
+    { text: "I feel like I belong when I'm around other people who gamble", fn: "social" },
+    { text: "Gambling is part of my social identity — it's what I do", fn: "social" },
+    { text: "I gamble because I believe I can win money", fn: "financial" },
+    { text: "I gamble to try to win back money I've lost", fn: "financial" },
+    { text: "I think a big win could solve my financial problems", fn: "financial" },
+    { text: "I see gambling as a way to make money, not just entertainment", fn: "financial" }
+];
+
+const PATHWAY = [
+    { text: "My gambling started as fun or entertainment and gradually got worse over time", pw: "p1" },
+    { text: "I believe I have strategies or systems that improve my chances of winning", pw: "p1" },
+    { text: "Before gambling became a problem, I was generally doing well in my life", pw: "p1" },
+    { text: "I was already struggling with depression, anxiety, or other emotional difficulties before gambling became a problem", pw: "p2" },
+    { text: "Gambling is one of the few things that makes emotional pain go away, even temporarily", pw: "p2" },
+    { text: "When I gamble, I sometimes lose track of time completely — hours feel like minutes", pw: "p2" },
+    { text: "I often act on impulse without thinking about consequences — not just with gambling", pw: "p3" },
+    { text: "Gambling is one of several behaviors I have trouble controlling", pw: "p3" },
+    { text: "I get bored very easily and need stimulation or excitement to feel normal", pw: "p3" }
+];
+
+const PGSI_OPTIONS = [
+    { label: "Never", value: 0 },
+    { label: "Sometimes", value: 1 },
+    { label: "Most of the time", value: 2 },
+    { label: "Almost always", value: 3 }
+];
+
+const FREQ_OPTIONS = [
+    { label: "Never", value: 0 },
+    { label: "Rarely", value: 1 },
+    { label: "Sometimes", value: 2 },
+    { label: "Often", value: 3 },
+    { label: "Almost always", value: 4 }
+];
+
+const AGREE_OPTIONS = [
+    { label: "Strongly disagree", value: 0 },
+    { label: "Disagree", value: 1 },
+    { label: "Neutral", value: 2 },
+    { label: "Agree", value: 3 },
+    { label: "Strongly agree", value: 4 }
+];
+
+// ── Scoring Functions ───────────────────────────────────────
+
+function scoreBBGS(answers) {
+    const total = answers.filter(a => a === 1).length;
+    return { total, proceed: total > 0, items: answers };
+}
+
+function scorePGSI(answers) {
+    const total = answers.reduce((s, v) => s + v, 0);
+    let category, cssClass;
+    if (total === 0) { category = "Non-problem gambling"; cssClass = "green"; }
+    else if (total <= 2) { category = "Low risk"; cssClass = "yellow"; }
+    else if (total <= 7) { category = "Moderate risk"; cssClass = "amber"; }
+    else { category = "Problem gambling"; cssClass = "red"; }
+    return { total, category, cssClass, items: answers };
+}
+
+function scoreFunctional(answers) {
+    const scores = { escape: 0, excitement: 0, social: 0, financial: 0 };
+    answers.forEach((v, i) => { scores[FUNCTIONAL[i].fn] += v; });
+    const max = Math.max(...Object.values(scores));
+    const primaries = Object.entries(scores).filter(([,v]) => v === max).map(([k]) => k);
+    return { scores, primary: primaries[0], primaries, max };
+}
+
+function scorePathway(answers) {
+    const scores = { p1: 0, p2: 0, p3: 0 };
+    answers.forEach((v, i) => { scores[PATHWAY[i].pw] += v; });
+    const max = Math.max(...Object.values(scores));
+    const primaries = Object.entries(scores).filter(([,v]) => v === max).map(([k]) => k);
+    return { scores, primary: primaries[0], primaries, max };
+}
+
+const FN_LABELS = { escape: "Escape", excitement: "Excitement", social: "Social", financial: "Financial" };
+const PW_LABELS = { p1: "Behaviourally Conditioned", p2: "Emotionally Vulnerable", p3: "Antisocial Impulsivist" };
+const PW_SHORT = { p1: "Pathway 1", p2: "Pathway 2", p3: "Pathway 3" };
+
+function generateRecommendations(fn, pw) {
+    const recs = [];
+    const sessions = new Set();
+
+    // Function-based recommendations
+    if (fn.primary === "escape") {
+        recs.push("Your primary function is <strong>Escape</strong> — gambling serves as your main way to manage difficult emotions. Treatment focus: building alternative emotion regulation strategies and addressing the underlying emotional pain that gambling numbs.");
+        sessions.add(6); sessions.add(7);
+    } else if (fn.primary === "excitement") {
+        recs.push("Your primary function is <strong>Excitement</strong> — gambling provides thrill and arousal that feels hard to get elsewhere. Treatment focus: understanding the reinforcement cycle, building alternative sources of excitement, and managing boredom without gambling.");
+        sessions.add(4); sessions.add(6);
+    } else if (fn.primary === "social") {
+        recs.push("Your primary function is <strong>Social</strong> — gambling is deeply connected to your social life and identity. Treatment focus: building non-gambling social connections and addressing the identity question of who you are outside of gambling.");
+        sessions.add(8); sessions.add(9);
+    } else if (fn.primary === "financial") {
+        recs.push("Your primary function is <strong>Financial</strong> — you see gambling as a way to make money or recover losses. Treatment focus: financial accountability, cognitive restructuring around gambling as income, and breaking the chasing cycle.");
+        sessions.add(4); sessions.add(5);
+    }
+
+    // Pathway-based recommendations
+    if (pw.primary === "p1") {
+        recs.push("<strong>" + PW_SHORT.p1 + " (Behaviourally Conditioned)</strong>: Your gambling likely escalated through conditioning and cognitive distortions rather than underlying emotional problems. Cognitive restructuring and psychoeducation about randomness are key interventions. Harm reduction may be appropriate with careful clinical evaluation.");
+        sessions.add(2); sessions.add(4);
+    } else if (pw.primary === "p2") {
+        recs.push("<strong>" + PW_SHORT.p2 + " (Emotionally Vulnerable)</strong>: Underlying emotional distress likely preceded your gambling. Treatment must address both the gambling and the emotional vulnerability — treating only the gambling without addressing the emotional pain leads to relapse. Abstinence is typically the appropriate goal.");
+        sessions.add(7); sessions.add(9);
+    } else if (pw.primary === "p3") {
+        recs.push("<strong>" + PW_SHORT.p3 + " (Antisocial Impulsivist)</strong>: Impulsivity across multiple domains suggests gambling is part of a broader pattern. Extended treatment with impulse control focus, possible ADHD assessment, and additional structure may be needed. Abstinence is the appropriate goal.");
+        sessions.add(5); sessions.add(6);
+    }
+
+    // Always include these
+    sessions.add(1); sessions.add(10);
+
+    return { recs, sessions: Array.from(sessions).sort((a, b) => a - b) };
+}
+
+// ── State ───────────────────────────────────────────────────
+
+let currentStep = 0; // 0=BBGS, 1=PGSI, 2=Functional, 3=Pathway
+let currentQ = 0;
+let bbgsAnswers = [];
+let pgsiAnswers = [];
+let funcAnswers = [];
+let pathAnswers = [];
+
+const STEP_NAMES = ["Brief Screen", "Severity", "Functional Analysis", "Pathway Indicators"];
+const STEP_COUNTS = [BBGS.length, PGSI.length, FUNCTIONAL.length, PATHWAY.length];
+
+function getStepAnswers() {
+    return [bbgsAnswers, pgsiAnswers, funcAnswers, pathAnswers][currentStep];
+}
+
+function getStepItems() {
+    if (currentStep === 0) return BBGS;
+    if (currentStep === 1) return PGSI;
+    if (currentStep === 2) return FUNCTIONAL;
+    return PATHWAY;
+}
+
+function getStepOptions() {
+    if (currentStep === 0) return null; // yes/no
+    if (currentStep === 1) return PGSI_OPTIONS;
+    if (currentStep === 2) return FREQ_OPTIONS;
+    return AGREE_OPTIONS;
+}
+
+// ── UI ──────────────────────────────────────────────────────
+
+function show(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+function startAssessment() {
+    show('assessment');
+    currentStep = 0; currentQ = 0;
+    bbgsAnswers = []; pgsiAnswers = []; funcAnswers = []; pathAnswers = [];
+    renderQuestion();
+}
+
+function updateProgress() {
+    for (let i = 0; i < 4; i++) {
+        const dot = document.getElementById('dot-' + i);
+        dot.className = 'progress-dot';
+        if (i < currentStep) dot.classList.add('done');
+        if (i === currentStep) dot.classList.add('current');
+    }
+    document.getElementById('progress-label').textContent =
+        'Step ' + (currentStep + 1) + ' of 4 — ' + STEP_NAMES[currentStep];
+
+    // Calculate overall progress
+    let done = 0;
+    for (let i = 0; i < currentStep; i++) done += STEP_COUNTS[i];
+    done += currentQ;
+    const total = STEP_COUNTS.reduce((a, b) => a + b, 0);
+    document.getElementById('progress-fill').style.width = (done / total * 100) + '%';
+}
+
+function renderQuestion() {
+    updateProgress();
+
+    const items = getStepItems();
+    const options = getStepOptions();
+    const answers = getStepAnswers();
+
+    const itemText = currentStep >= 2 ? items[currentQ].text : items[currentQ];
+    const totalInStep = items.length;
+
+    document.getElementById('q-number').textContent =
+        STEP_NAMES[currentStep] + ' — Question ' + (currentQ + 1) + ' of ' + totalInStep;
+
+    const qText = document.getElementById('q-text');
+    qText.classList.add('fading');
+    setTimeout(() => {
+        qText.textContent = itemText;
+        qText.classList.remove('fading');
+    }, 150);
+
+    const row = document.getElementById('q-answers');
+    row.innerHTML = '';
+
+    if (currentStep === 0) {
+        // Yes/No
+        const yesBtn = document.createElement('button');
+        yesBtn.className = 'answer-btn yes-btn';
+        yesBtn.textContent = 'Yes';
+        yesBtn.onclick = () => answer(1);
+
+        const noBtn = document.createElement('button');
+        noBtn.className = 'answer-btn no-btn';
+        noBtn.textContent = 'No';
+        noBtn.onclick = () => answer(0);
+
+        row.appendChild(yesBtn);
+        row.appendChild(noBtn);
+    } else {
+        options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'answer-btn';
+            btn.textContent = opt.label;
+            btn.onclick = () => answer(opt.value);
+            row.appendChild(btn);
+        });
+    }
+
+    // Back button visibility
+    document.getElementById('back-btn').style.visibility =
+        (currentStep === 0 && currentQ === 0) ? 'hidden' : 'visible';
+}
+
+function answer(value) {
+    const answers = getStepAnswers();
+    answers[currentQ] = value;
+
+    // Flash
+    const btns = document.querySelectorAll('.answer-btn');
+    btns.forEach(b => {
+        if ((currentStep === 0 && value === 1 && b.classList.contains('yes-btn')) ||
+            (currentStep === 0 && value === 0 && b.classList.contains('no-btn')) ||
+            (currentStep > 0 && b.textContent === getStepOptions().find(o => o.value === value)?.label)) {
+            b.classList.add('flash');
+        }
+    });
+
+    setTimeout(() => advance(), 200);
+}
+
+function advance() {
+    const items = getStepItems();
+    currentQ++;
+
+    if (currentQ >= items.length) {
+        // Step complete — move to next or finish
+        if (currentStep === 0) {
+            const result = scoreBBGS(bbgsAnswers);
+            if (!result.proceed) {
+                show('gate');
+                return;
+            }
+            currentStep = 1; currentQ = 0;
+        } else if (currentStep === 1) {
+            currentStep = 2; currentQ = 0;
+        } else if (currentStep === 2) {
+            currentStep = 3; currentQ = 0;
+        } else {
+            showResults();
+            return;
+        }
+    }
+
+    renderQuestion();
+}
+
+function goBack() {
+    if (currentQ > 0) {
+        currentQ--;
+        getStepAnswers().pop();
+    } else if (currentStep > 0) {
+        currentStep--;
+        const prevAnswers = getStepAnswers();
+        currentQ = prevAnswers.length - 1;
+        prevAnswers.pop();
+    }
+    renderQuestion();
+}
+
+// ── Results ─────────────────────────────────────────────────
+
+function showResults() {
+    const bbgs = scoreBBGS(bbgsAnswers);
+    const pgsi = scorePGSI(pgsiAnswers);
+    const func = scoreFunctional(funcAnswers);
+    const path = scorePathway(pathAnswers);
+    const recs = generateRecommendations(func, path);
+
+    show('results');
+    window.scrollTo(0, 0);
+
+    // Date
+    document.getElementById('result-date').textContent =
+        new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    // Severity
+    document.getElementById('severity-badge').className = 'severity-badge ' + pgsi.cssClass;
+    document.getElementById('severity-badge').textContent = pgsi.category;
+    document.getElementById('severity-score').textContent = 'PGSI Score: ' + pgsi.total + '/27';
+
+    // Function bars
+    const funcBars = document.getElementById('function-bars');
+    funcBars.innerHTML = '';
+    const fnMax = 16;
+    for (const [key, label] of Object.entries(FN_LABELS)) {
+        const isPrimary = key === func.primary;
+        funcBars.innerHTML += `
+            <div class="bar-item">
+                <div class="bar-label-row">
+                    <span class="bar-label ${isPrimary ? 'primary' : ''}">${label}${isPrimary ? ' ← Primary' : ''}</span>
+                    <span class="bar-value ${isPrimary ? 'primary' : ''}">${func.scores[key]}/${fnMax}</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill ${isPrimary ? 'primary' : ''}" style="width:0%"></div></div>
+            </div>`;
+    }
+
+    // Pathway bars
+    const pathBars = document.getElementById('pathway-bars');
+    pathBars.innerHTML = '';
+    const pwMax = 12;
+    for (const [key, label] of Object.entries(PW_LABELS)) {
+        const isPrimary = key === path.primary;
+        pathBars.innerHTML += `
+            <div class="bar-item">
+                <div class="bar-label-row">
+                    <span class="bar-label ${isPrimary ? 'primary' : ''}">${PW_SHORT[key]}: ${label}${isPrimary ? ' ← Primary' : ''}</span>
+                    <span class="bar-value ${isPrimary ? 'primary' : ''}">${path.scores[key]}/${pwMax}</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill pathway ${isPrimary ? 'primary' : ''}" style="width:0%"></div></div>
+            </div>`;
+    }
+
+    // Animate bars after render
+    requestAnimationFrame(() => {
+        setTimeout(() => {
+            funcBars.querySelectorAll('.bar-fill').forEach((bar, i) => {
+                const key = Object.keys(FN_LABELS)[i];
+                bar.style.width = (func.scores[key] / fnMax * 100) + '%';
+            });
+            pathBars.querySelectorAll('.bar-fill').forEach((bar, i) => {
+                const key = Object.keys(PW_LABELS)[i];
+                bar.style.width = (path.scores[key] / pwMax * 100) + '%';
+            });
+        }, 100);
+    });
+
+    // Summary
+    document.getElementById('summary-text').innerHTML = recs.recs.map(r => '<p>' + r + '</p>').join('');
+
+    // Session links
+    const sessionNames = {
+        1: "Understanding the Problem", 2: "Functional Analysis", 3: "Knowing Your Pathway",
+        4: "Triggers & High-Risk", 5: "Access: Money & Technology", 6: "Urge Management",
+        7: "Emotions & Gambling", 8: "Relationships & Trust", 9: "Identity & Values",
+        10: "Relapse Prevention"
+    };
+    const sessionFiles = {
+        1: "index.html", 2: "session-2.html", 3: "session-3.html", 4: "session-4.html",
+        5: "session-5.html", 6: "session-6.html", 7: "session-7.html", 8: "session-8.html",
+        9: "session-9.html", 10: "session-10.html"
+    };
+    const linksEl = document.getElementById('session-links');
+    linksEl.innerHTML = recs.sessions.map(s =>
+        `<a href="${sessionFiles[s]}" class="session-link">Session ${s}: ${sessionNames[s]}</a>`
+    ).join('');
+
+    // Store for copy
+    window._gearResults = { bbgs, pgsi, func, path, recs };
+}
+
+function copySummary() {
+    const r = window._gearResults;
+    const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    const text = [
+        'GEAR Assessment Results — ' + date,
+        '',
+        'BBGS: ' + r.bbgs.total + '/3 endorsed',
+        'PGSI Total: ' + r.pgsi.total + '/27 — ' + r.pgsi.category,
+        '',
+        'Primary Function: ' + FN_LABELS[r.func.primary] + ' (' + r.func.scores[r.func.primary] + '/16)',
+        '  Escape: ' + r.func.scores.escape + '/16 | Excitement: ' + r.func.scores.excitement + '/16 | Social: ' + r.func.scores.social + '/16 | Financial: ' + r.func.scores.financial + '/16',
+        '',
+        'Pathway Indicator: ' + PW_SHORT[r.path.primary] + ' — ' + PW_LABELS[r.path.primary] + ' (' + r.path.scores[r.path.primary] + '/12)',
+        '  P1 Conditioned: ' + r.path.scores.p1 + '/12 | P2 Emotional: ' + r.path.scores.p2 + '/12 | P3 Impulsivist: ' + r.path.scores.p3 + '/12',
+        '',
+        'Recommended GEAR Sessions: ' + r.recs.sessions.join(', ')
+    ].join('\n');
+
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.classList.add('copied');
+        btn.innerHTML = '<span>&#x2713;</span> Copied to Clipboard';
+        setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.innerHTML = '<span>&#x2398;</span> Copy Clinical Summary';
+        }, 2500);
+    });
+}
+
+// Keyboard support
+document.addEventListener('keydown', (e) => {
+    if (!document.getElementById('assessment').classList.contains('active')) return;
+    const btns = document.querySelectorAll('.answer-btn');
+    if (e.key === 'ArrowLeft' || e.key === 'Backspace') { e.preventDefault(); goBack(); }
+    if (currentStep === 0) {
+        if (e.key === 'y' || e.key === 'Y') btns[0]?.click();
+        if (e.key === 'n' || e.key === 'N') btns[1]?.click();
+    } else {
+        const num = parseInt(e.key);
+        if (num >= 1 && num <= btns.length) btns[num - 1]?.click();
+    }
+});
+</script>
+</body>
+</html>
