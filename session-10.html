@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relapse Prevention and Moving Forward — GEAR Program</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --text:       #1C1917;
+            --text-2:     #57534E;
+            --text-3:     #A8A29E;
+            --accent:     #9A6B2C;
+            --accent-bg:  #FAF3EA;
+            --cool:       #3B7A5A;
+            --cool-bg:    #EDF5F0;
+            --border:     #E7E5E4;
+            --bg:         #FAFAF7;
+            --surface:    #FFFFFF;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body::before {
+            content: '';
+            display: block;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        /* ---- Session Nav ---- */
+        .session-nav {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 0.5rem 1.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            white-space: nowrap;
+            text-align: center;
+        }
+        .session-nav a {
+            display: inline-block;
+            font-family: inherit;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--text-3);
+            text-decoration: none;
+            padding: 0.4rem 0.6rem;
+            border-radius: 4px;
+            transition: color 0.15s, background 0.15s;
+        }
+        .session-nav a:hover { color: var(--text-2); background: var(--bg); }
+        .session-nav a.active {
+            color: var(--accent);
+            font-weight: 600;
+            background: var(--accent-bg);
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 4rem;
+        }
+
+        /* ---- Header ---- */
+        .header { margin-bottom: 2.5rem; }
+        .header-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--text);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            font-size: 1.05rem;
+            color: var(--text-2);
+            font-weight: 400;
+        }
+
+        /* ---- Navigation ---- */
+        .nav {
+            display: flex;
+            gap: 0.25rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .nav button {
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            padding: 0.75rem 1rem;
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-3);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: color 0.15s, border-color 0.15s;
+        }
+        .nav button:hover { color: var(--text-2); }
+        .nav button.active {
+            color: var(--accent);
+            font-weight: 600;
+            border-bottom-color: var(--accent);
+        }
+
+        /* ---- Pages ---- */
+        .page { display: none; }
+        .page.active { display: block; animation: appear 0.25s ease; }
+        @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+
+        /* ---- Typography ---- */
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: 0.5rem;
+        }
+        .section-label.warm { color: var(--accent); }
+        .section-label.cool { color: var(--cool); }
+
+        h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.01em;
+            margin-bottom: 0.75rem;
+        }
+        h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+        .body-text {
+            font-size: 0.95rem;
+            color: var(--text-2);
+            line-height: 1.8;
+        }
+        .body-text + .body-text { margin-top: 0.75rem; }
+        .body-text strong { color: var(--text); font-weight: 600; }
+
+        /* ---- Timing ---- */
+        .timing {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-3);
+            float: right;
+            margin-top: 0.2rem;
+        }
+
+        /* ---- Dividers ---- */
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2.5rem 0;
+        }
+
+        /* ---- Callout ---- */
+        .callout {
+            border-left: 3px solid var(--border);
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+        }
+        .callout.warm { border-left-color: var(--accent); background: var(--accent-bg); }
+        .callout.cool { border-left-color: var(--cool); background: var(--cool-bg); }
+        .callout .callout-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: 0.4rem;
+        }
+        .callout.warm .callout-label { color: var(--accent); }
+        .callout.cool .callout-label { color: var(--cool); }
+        .callout p {
+            font-size: 0.9rem;
+            color: var(--text-2);
+            line-height: 1.7;
+        }
+
+        /* ---- Chain ---- */
+        .chain {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin: 1.5rem 0 0;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .chain-step {
+            flex: 1;
+            padding: 1rem 0.75rem;
+            text-align: center;
+            cursor: pointer;
+            border-right: 1px solid var(--border);
+            background: var(--surface);
+            transition: background 0.15s;
+        }
+        .chain-step:last-child { border-right: none; }
+        .chain-step:hover { background: var(--bg); }
+        .chain-step.active { background: var(--accent-bg); }
+        .chain-num {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-3);
+        }
+        .chain-step.active .chain-num { color: var(--accent); }
+        .chain-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: 0.15rem;
+        }
+
+        .chain-detail {
+            display: none;
+            padding: 1.25rem;
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            background: var(--surface);
+            margin-top: -1px;
+            margin-bottom: 1.5rem;
+        }
+        .chain-detail.active { display: block; }
+        .chain-detail p {
+            font-size: 0.9rem;
+            color: var(--text-2);
+            line-height: 1.75;
+        }
+        .chain-detail p + p { margin-top: 0.75rem; }
+        .chain-example {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-3);
+            font-style: italic;
+            padding-left: 1rem;
+            border-left: 2px solid var(--border);
+        }
+
+        /* ---- Accordion ---- */
+        .accordion { margin: 1.5rem 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+        .acc-item { border-bottom: 1px solid var(--border); }
+        .acc-item:last-child { border-bottom: none; }
+        .acc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            background: var(--surface);
+            transition: background 0.15s;
+            user-select: none;
+        }
+        .acc-header:hover { background: var(--bg); }
+        .acc-title { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+        .acc-icon {
+            font-size: 1.1rem;
+            color: var(--text-3);
+            transition: transform 0.2s;
+            font-weight: 300;
+            line-height: 1;
+        }
+        .acc-item.open .acc-icon { transform: rotate(45deg); }
+        .acc-body {
+            display: none;
+            padding: 0 1.25rem 1.25rem;
+            background: var(--surface);
+        }
+        .acc-item.open .acc-body { display: block; }
+        .acc-body p { font-size: 0.9rem; color: var(--text-2); line-height: 1.75; }
+        .acc-body p + p { margin-top: 0.75rem; }
+        .acc-body ul { list-style: none; margin-top: 0.5rem; }
+        .acc-body ul li {
+            font-size: 0.9rem;
+            color: var(--text-2);
+            line-height: 1.75;
+            padding-left: 1rem;
+            position: relative;
+        }
+        .acc-body ul li::before {
+            content: '\00B7';
+            position: absolute;
+            left: 0;
+            color: var(--text-3);
+        }
+        .acc-body .aside {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--text-3);
+            padding-left: 1rem;
+            border-left: 2px solid var(--border);
+        }
+
+        /* ---- Stage Selector ---- */
+        .stage-chain {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin: 1.5rem 0 0;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .stage-step {
+            flex: 1;
+            padding: 0.85rem 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            border-right: 1px solid var(--border);
+            background: var(--surface);
+            transition: background 0.15s;
+        }
+        .stage-step:last-child { border-right: none; }
+        .stage-step:hover { background: var(--bg); }
+        .stage-step.active { background: var(--cool-bg); }
+        .stage-num {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-3);
+        }
+        .stage-step.active .stage-num { color: var(--cool); }
+        .stage-name {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: 0.15rem;
+        }
+
+        .stage-detail {
+            display: none;
+            padding: 1.25rem;
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            background: var(--surface);
+            margin-top: -1px;
+            margin-bottom: 1.5rem;
+        }
+        .stage-detail.active { display: block; }
+        .stage-detail p {
+            font-size: 0.9rem;
+            color: var(--text-2);
+            line-height: 1.75;
+        }
+        .stage-detail p + p { margin-top: 0.75rem; }
+
+        /* ---- Numbered Steps ---- */
+        .steps { margin: 1.5rem 0; }
+        .step {
+            display: flex;
+            gap: 1rem;
+            align-items: baseline;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .step:last-child { border-bottom: none; }
+        .step-num {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-3);
+            flex-shrink: 0;
+            width: 1.5rem;
+            text-align: right;
+        }
+        .step-content { flex: 1; }
+        .step-q {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .step-hint {
+            font-size: 0.82rem;
+            color: var(--text-3);
+            margin-top: 0.15rem;
+            line-height: 1.6;
+        }
+
+        /* ---- Discussion Questions ---- */
+        .questions { margin: 1.5rem 0; }
+        .question {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .question:last-child { border-bottom: none; }
+        .question-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: 0.3rem;
+        }
+        .question-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text);
+            line-height: 1.7;
+        }
+        .question-note {
+            font-size: 0.82rem;
+            font-style: italic;
+            color: var(--text-3);
+            margin-top: 0.3rem;
+        }
+
+        /* ---- Page nav ---- */
+        .page-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        .page-nav button {
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--accent);
+            cursor: pointer;
+            padding: 0.5rem 0;
+            transition: opacity 0.15s;
+        }
+        .page-nav button:hover { opacity: 0.7; }
+        .page-nav .ghost { visibility: hidden; }
+
+        /* ---- Resource Card ---- */
+        .resource-group {
+            margin: 1.5rem 0;
+        }
+        .resource-group h3 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .resource-list {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .resource-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+        }
+        .resource-item:last-child { border-bottom: none; }
+        .resource-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+        .resource-detail {
+            font-size: 0.82rem;
+            color: var(--text-3);
+            text-align: right;
+        }
+
+        /* ---- Footer ---- */
+        .footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-3);
+            line-height: 1.8;
+        }
+        .footer strong { color: var(--text-2); font-weight: 600; }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 600px) {
+            .container { padding: 2rem 1.25rem 3rem; }
+            h1 { font-size: 1.8rem; }
+            .chain, .stage-chain { flex-direction: column; }
+            .chain-step, .stage-step { border-right: none; border-bottom: 1px solid var(--border); }
+            .chain-step:last-child, .stage-step:last-child { border-bottom: none; }
+            .chain-detail, .stage-detail { border-radius: 0 0 8px 8px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="session-nav">
+    <a href="index.html">Session 1</a>
+    <a href="session-2.html">Session 2</a>
+    <a href="session-3.html">Session 3</a>
+    <a href="session-4.html">Session 4</a>
+    <a href="session-5.html">Session 5</a>
+    <a href="session-6.html">Session 6</a>
+    <a href="session-7.html">Session 7</a>
+    <a href="session-8.html">Session 8</a>
+    <a href="session-9.html">Session 9</a>
+    <a href="session-10.html" class="active">Session 10</a>
+</nav>
+
+<div class="container">
+
+    <header class="header">
+        <div class="header-label">Gambling Group — Session 10</div>
+        <h1>Relapse Prevention<br>and Moving Forward</h1>
+        <p class="subtitle">GEAR Program — Gambling Evaluation and Reduction</p>
+    </header>
+
+    <nav class="nav">
+        <button class="active" onclick="showPage(0, this)">Check-In</button>
+        <button onclick="showPage(1, this)">Complacency</button>
+        <button onclick="showPage(2, this)">Your Plan</button>
+        <button onclick="showPage(3, this)">Resources</button>
+        <button onclick="showPage(4, this)">Discussion</button>
+        <button onclick="showPage(5, this)">Closing</button>
+    </nav>
+
+
+    <!-- ======================== CHECK-IN ======================== -->
+    <div class="page active">
+
+        <div class="section-label warm">Welcome</div>
+        <h2><span class="timing">8 to 10 min</span>About today's session</h2>
+        <p class="body-text">
+            This is our last structured session. Over the past nine sessions, you've mapped the cycle, understood the function, identified your triggers, built barriers, learned to ride urges, explored the emotional core, confronted secrecy, and defined your values.
+        </p>
+        <p class="body-text">
+            Today, we put it all together into a personal relapse prevention plan — your plan, built from your work. And we talk honestly about what comes next.
+        </p>
+
+        <hr class="divider">
+
+        <div class="section-label">Check-in</div>
+        <h2><span class="timing">8 to 10 min</span>Getting into it</h2>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <div class="step-q">What's going on for you today?</div>
+                    <div class="step-hint">Not gambling-specific. Just where your head is at walking in.</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <div class="step-q">Did you take a values-aligned action this week? What was it?</div>
+                    <div class="step-hint">From last session's between-session task. Big or small.</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <div class="step-q">How are you feeling about this being our last session?</div>
+                    <div class="step-hint">Relief, anxiety, sadness, readiness — whatever is honest.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-nav">
+            <button class="ghost">&larr; Back</button>
+            <button onclick="showPage(1)">Complacency &rarr;</button>
+        </div>
+    </div>
+
+
+    <!-- ======================== COMPLACENCY ======================== -->
+    <div class="page">
+
+        <div class="section-label warm">The Complacency Problem</div>
+        <h2><span class="timing">8 to 10 min</span>The quiet relapse</h2>
+        <p class="body-text">
+            The most dangerous thing anyone can tell you right now is "you've done great work." Not because it's not true — it is. But because the moment you feel like you've got this handled is the moment your guard drops.
+        </p>
+        <p class="body-text">
+            The biggest risk in gambling recovery isn't the first month. It's month six. Month nine. The point where you've been clean long enough to think you don't need the meetings, the therapy, the barriers, the toolkit.
+        </p>
+
+        <div class="callout warm" style="margin-top: 1.5rem;">
+            <div class="callout-label">How complacency works</div>
+            <p>Complacency is the quiet relapse. It happens before the bet. It happens when you skip a meeting because you feel fine. When you delete Gamban because "I trust myself now." When you stop checking in with your support person because "I don't want to bother them." Each of those is a brick removed from the wall. By the time you notice, the wall is gone.</p>
+        </div>
+
+        <hr class="divider">
+
+        <div class="section-label">Risk Timelines</div>
+        <h2>When to watch out</h2>
+        <p class="body-text">
+            Recovery from gambling follows predictable risk patterns. People tend to be at highest risk at certain thresholds — not because those numbers are magic, but because of what they represent.
+        </p>
+
+        <div class="chain">
+            <div class="chain-step active" onclick="chainStep(0, this)">
+                <div class="chain-num">Threshold</div>
+                <div class="chain-name">30 Days</div>
+            </div>
+            <div class="chain-step" onclick="chainStep(1, this)">
+                <div class="chain-num">Threshold</div>
+                <div class="chain-name">90 Days</div>
+            </div>
+            <div class="chain-step" onclick="chainStep(2, this)">
+                <div class="chain-num">Threshold</div>
+                <div class="chain-name">6 Months</div>
+            </div>
+            <div class="chain-step" onclick="chainStep(3, this)">
+                <div class="chain-num">Threshold</div>
+                <div class="chain-name">1 Year</div>
+            </div>
+        </div>
+
+        <div class="chain-detail active" id="cd0">
+            <p><strong>The initial crisis energy is fading.</strong> You remember why you stopped, but the urgency is softening. Urges are still frequent. The new habits haven't solidified yet. This is where white-knuckling gives way to needing real tools.</p>
+            <div class="chain-example">The initial shock that drove you to get help is wearing off. The routines aren't automatic yet.</div>
+        </div>
+        <div class="chain-detail" id="cd1">
+            <p><strong>You're starting to feel normal again.</strong> And "normal" feels like "maybe I don't need all this." The barriers start to feel excessive. The meetings start to feel optional. Your brain starts testing whether it can handle a little more freedom.</p>
+            <div class="chain-example">"I've been good for three months. I probably don't need Gamban anymore."</div>
+        </div>
+        <div class="chain-detail" id="cd2">
+            <p><strong>Stability can become boredom.</strong> The crisis is long gone. Life is calmer, but maybe also flatter. The excitement that gambling provided starts to look more appealing in retrospect. Memory edits out the consequences and keeps the highs.</p>
+            <div class="chain-example">"It wasn't that bad." Your brain is rewriting the story. That's a warning sign.</div>
+        </div>
+        <div class="chain-detail" id="cd3">
+            <p><strong>The anniversary effect.</strong> A full year feels like proof that you're "cured." You start to believe you were different from other people with gambling problems. You start to believe you could gamble normally now. You can't — but the thought feels convincing.</p>
+            <div class="chain-example">"I've been clean for a year. I can handle a friendly poker game." That's the complacency talking.</div>
+        </div>
+
+        <div class="callout cool" style="margin-top: 0.5rem;">
+            <div class="callout-label">The truth</div>
+            <p>The people who sustain recovery are the ones who stay engaged even when they feel good. Especially when they feel good.</p>
+        </div>
+
+        <div class="page-nav">
+            <button onclick="showPage(0)">&larr; Check-In</button>
+            <button onclick="showPage(2)">Your Plan &rarr;</button>
+        </div>
+    </div>
+
+
+    <!-- ======================== YOUR PLAN ======================== -->
+    <div class="page">
+
+        <div class="section-label cool">Your Relapse Prevention Plan</div>
+        <h2><span class="timing">15 to 18 min</span>Putting it all together</h2>
+        <p class="body-text">
+            This plan pulls from everything you've worked on across all ten sessions. Go through each section. Fill in what's true for you. This is your plan — built from your experience, your triggers, your tools.
+        </p>
+
+        <div class="accordion" style="margin-top: 1.5rem;">
+            <div class="acc-item open">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">1. My Warning Signs</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p><strong>What are the early signals that you're drifting toward relapse — before the urge even hits?</strong></p>
+                    <ul>
+                        <li><strong>Emotional signs:</strong> What emotions precede gambling for you? (from Session 7)</li>
+                        <li><strong>Behavioral signs:</strong> Isolating, skipping meetings, loosening financial controls, checking scores</li>
+                        <li><strong>Cognitive signs:</strong> "Just this once." "I can handle it." "I don't really have a problem anymore."</li>
+                        <li><strong>Relational signs:</strong> Increasing secrecy, avoiding accountability conversations</li>
+                    </ul>
+                    <div class="aside">The warning signs come before the urge. If you can catch them here, you have more options.</div>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">2. My Triggers</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p><strong>From Session 4 — name your top triggers in each category:</strong></p>
+                    <ul>
+                        <li><strong>Top 3 emotional triggers:</strong> The feelings that pull you toward gambling</li>
+                        <li><strong>Top 3 environmental triggers:</strong> Places, times, people, situations</li>
+                        <li><strong>Top 3 cognitive distortions:</strong> The thoughts that give you permission</li>
+                        <li><strong>Top 3 access vulnerabilities:</strong> How gambling is still within reach</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">3. My Barriers</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p><strong>From Session 5 — what's between you and gambling?</strong></p>
+                    <ul>
+                        <li><strong>Access barriers in place:</strong> Gamban, self-exclusion, device controls</li>
+                        <li><strong>Financial barriers in place:</strong> TrueLink, transaction alerts, accountability partner</li>
+                        <li><strong>Which barriers am I tempted to remove?</strong> Flag these — wanting to remove a barrier is itself a warning sign</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">4. My Urge Management Toolkit</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p><strong>From Session 6 — what do you do when the urge hits?</strong></p>
+                    <ul>
+                        <li><strong>Urge surfing:</strong> Urges peak at about 15-20 minutes and then decline</li>
+                        <li><strong>HALT check:</strong> Am I Hungry, Angry, Lonely, or Tired?</li>
+                        <li><strong>My top 3 competing responses:</strong> What do you do instead?</li>
+                        <li><strong>The 3 D's:</strong> Delay, Distract, Disclose</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">5. My Emotional Coping Plan</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p><strong>From Session 7 — know your emotional vulnerability:</strong></p>
+                    <ul>
+                        <li><strong>The emotion I'm most vulnerable to:</strong> The one that most reliably leads to gambling</li>
+                        <li><strong>What I used to do:</strong> Gamble</li>
+                        <li><strong>What I do now:</strong> Your current alternative</li>
+                        <li><strong>What I'm still building capacity for:</strong> What's still hard</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">6. My Support Network</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p><strong>From Session 8 — who's with you in this?</strong></p>
+                    <ul>
+                        <li><strong>Who knows about my gambling</strong></li>
+                        <li><strong>Who I can call when I'm struggling</strong></li>
+                        <li><strong>My accountability partner</strong></li>
+                        <li><strong>My next therapy appointment</strong></li>
+                        <li><strong>Support groups I attend</strong></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">7. My Values</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p><strong>From Session 9 — what you're building toward:</strong></p>
+                    <ul>
+                        <li><strong>My top 3 values</strong></li>
+                        <li><strong>One values-aligned action I commit to weekly</strong></li>
+                        <li><strong>What "winning" means to me now</strong></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">8. If I Relapse</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p><strong>One lapse does not erase all progress. It's data, not destiny.</strong></p>
+                    <ul>
+                        <li><strong>Immediately:</strong> Call your support person</li>
+                        <li><strong>Within 24 hours:</strong> Contact your therapist</li>
+                        <li><strong>Do NOT chase losses</strong> — stop immediately</li>
+                        <li><strong>Reinstall barriers</strong> (Gamban, etc.) if you removed them</li>
+                        <li><strong>Return to group or GA</strong> within the week</li>
+                    </ul>
+                    <div class="aside">A relapse is a moment. A return to gambling is a choice made after the relapse. The difference is what happens in the 24 hours after the lapse.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-nav">
+            <button onclick="showPage(1)">&larr; Complacency</button>
+            <button onclick="showPage(3)">Resources &rarr;</button>
+        </div>
+    </div>
+
+
+    <!-- ======================== RESOURCES ======================== -->
+    <div class="page">
+
+        <div class="section-label cool">Resources</div>
+        <h2><span class="timing">5 min</span>Your ongoing support</h2>
+        <p class="body-text">
+            The support doesn't stop when the group ends. These are the resources available to you. Save what's useful.
+        </p>
+
+        <div class="resource-group">
+            <h3>Peer Support and Recovery</h3>
+            <div class="resource-list">
+                <div class="resource-item">
+                    <div class="resource-name">Gamblers Anonymous</div>
+                    <div class="resource-detail">ga.org</div>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">Gamblers in Recovery</div>
+                    <div class="resource-detail">gamblersinrecovery.com</div>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">Gam-Anon (for family members)</div>
+                    <div class="resource-detail">gam-anon.org</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="resource-group">
+            <h3>Crisis Resources</h3>
+            <div class="resource-list">
+                <div class="resource-item">
+                    <div class="resource-name">National Problem Gambling Helpline</div>
+                    <div class="resource-detail">1-800-522-4700</div>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">PA Gambling Helpline</div>
+                    <div class="resource-detail">1-800-848-1880</div>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">988 Suicide &amp; Crisis Lifeline</div>
+                    <div class="resource-detail">Call or text 988</div>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">Crisis Text Line</div>
+                    <div class="resource-detail">Text HOME to 741741</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="resource-group">
+            <h3>Financial Tools</h3>
+            <div class="resource-list">
+                <div class="resource-item">
+                    <div class="resource-name">Self-Exclusion (PA)</div>
+                    <div class="resource-detail">responsibleplay.pa.gov</div>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">Gamban (blocking software)</div>
+                    <div class="resource-detail">gamban.com</div>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">TrueLink Card</div>
+                    <div class="resource-detail">truelinkfinancial.com</div>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">NFCC (debt management)</div>
+                    <div class="resource-detail">nfcc.org</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout cool" style="margin-top: 1.5rem;">
+            <div class="callout-label">Keep these accessible</div>
+            <p>Put your support person's number somewhere you can find it at 2 AM. Save the helpline. Bookmark the meeting finder. Make it easy for future-you to reach out — because future-you might not feel like doing the research.</p>
+        </div>
+
+        <div class="page-nav">
+            <button onclick="showPage(2)">&larr; Your Plan</button>
+            <button onclick="showPage(4)">Discussion &rarr;</button>
+        </div>
+    </div>
+
+
+    <!-- ======================== DISCUSSION ======================== -->
+    <div class="page">
+
+        <div class="section-label warm">Final Discussion</div>
+        <h2><span class="timing">8 to 10 min</span>Looking back, looking forward</h2>
+        <p class="body-text">
+            This is the last group conversation. Make it count.
+        </p>
+
+        <div class="questions">
+            <div class="question">
+                <div class="question-label">Change</div>
+                <div class="question-text">What's different for you now compared to when you started this group?</div>
+            </div>
+            <div class="question">
+                <div class="question-label">Learning</div>
+                <div class="question-text">What was the most important thing you learned?</div>
+                <div class="question-note">Not what you think you should say. What actually stayed with you.</div>
+            </div>
+            <div class="question">
+                <div class="question-label">Unfinished</div>
+                <div class="question-text">What are you still working on? What's unfinished?</div>
+                <div class="question-note">Being honest about what's not done is as important as naming what is.</div>
+            </div>
+            <div class="question">
+                <div class="question-label">Connection</div>
+                <div class="question-text">What will you miss about this group?</div>
+            </div>
+        </div>
+
+        <div class="page-nav">
+            <button onclick="showPage(3)">&larr; Resources</button>
+            <button onclick="showPage(5)">Closing &rarr;</button>
+        </div>
+    </div>
+
+
+    <!-- ======================== CLOSING ======================== -->
+    <div class="page">
+
+        <div class="section-label">Closing Ceremony</div>
+        <h2><span class="timing">5 to 7 min</span>Final round</h2>
+        <p class="body-text">
+            This is your chance to say what you want to say. Two questions — take your time with each.
+        </p>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <div class="step-q">What's one commitment you're making to yourself going forward?</div>
+                    <div class="step-hint">Not a pledge. Not a promise you can't keep. A stated intention grounded in what you've learned.</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <div class="step-q">What's one thing you want to say to the group before we close?</div>
+                    <div class="step-hint">Gratitude, honesty, a wish for someone — whatever feels right.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout warm" style="margin-top: 2rem;">
+            <div class="callout-label">The work continues</div>
+            <p>
+                You came here because something needed to change. Over these ten sessions, you've mapped the cycle, understood the function, built trigger maps, put up barriers, learned to ride urges, explored the emotional core, confronted secrecy, defined your values, and built a plan. That's real work.
+            </p>
+            <p style="margin-top: 0.75rem;">
+                But the work doesn't end here. It continues in every meeting you attend, every call you make when the urge hits, every day you choose to live by your values instead of chasing a bet. Recovery isn't a destination. It's a practice. And you've started practicing.
+            </p>
+        </div>
+
+        <div class="callout cool" style="margin-top: 1rem;">
+            <div class="callout-label">You are not alone</div>
+            <p>
+                Your individual therapist is here. GA is here. The helpline is here. This group may continue. The support doesn't stop — and reaching out when you need it is not weakness. It's the single most important skill in recovery.
+            </p>
+        </div>
+
+        <div class="callout" style="margin-top: 1rem;">
+            <p>
+                If anything comes up after this session ends — an urge, a lapse, a hard day — reach out.
+                You have the tools. You have the numbers. You have people who understand.
+                Use them.
+            </p>
+        </div>
+
+        <div class="page-nav">
+            <button onclick="showPage(4)">&larr; Discussion</button>
+            <button onclick="showPage(0)">Start over</button>
+        </div>
+    </div>
+
+
+    <div class="footer">
+        <strong>Support is always available</strong><br>
+        National Problem Gambling Helpline: <strong>1-800-522-4700</strong> &middot; Text: <strong>HELPLINE to 233777</strong><br>
+        Crisis Text Line: text HOME to 741741 &middot; 988 Lifeline: call or text 988
+    </div>
+
+</div>
+
+<script>
+    function showPage(i, btn) {
+        document.querySelectorAll('.page').forEach((p, j) => p.classList.toggle('active', j === i));
+        document.querySelectorAll('.nav button').forEach((b, j) => b.classList.toggle('active', j === i));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function chainStep(i, el) {
+        document.querySelectorAll('.chain-step').forEach(s => s.classList.remove('active'));
+        el.classList.add('active');
+        for (let j = 0; j < 4; j++) document.getElementById('cd' + j).classList.toggle('active', j === i);
+    }
+
+    function toggleAcc(header) {
+        header.closest('.acc-item').classList.toggle('open');
+    }
+</script>
+</body>
+</html>

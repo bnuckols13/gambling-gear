@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Understanding the Problem — GEAR Program</title>
+    <title>Urge Management — GEAR Program</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -37,6 +37,36 @@
             display: block;
             height: 3px;
             background: var(--accent);
+        }
+
+        /* ---- Session Nav ---- */
+        .session-nav {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 0.5rem 1.5rem;
+            display: flex;
+            gap: 0.15rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .session-nav a {
+            font-family: inherit;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--text-3);
+            text-decoration: none;
+            padding: 0.35rem 0.55rem;
+            border-radius: 4px;
+            white-space: nowrap;
+            transition: color 0.15s, background 0.15s;
+        }
+        .session-nav a:hover { color: var(--text-2); background: var(--bg); }
+        .session-nav a.active {
+            color: var(--accent);
+            font-weight: 600;
+            background: var(--accent-bg);
         }
 
         .container {
@@ -169,13 +199,14 @@
             margin-bottom: 0.4rem;
         }
         .callout.warm .callout-label { color: var(--accent); }
+        .callout.cool .callout-label { color: var(--cool); }
         .callout p {
             font-size: 0.9rem;
             color: var(--text-2);
             line-height: 1.7;
         }
 
-        /* ---- Gambling Cycle Chain ---- */
+        /* ---- Chain ---- */
         .chain {
             display: flex;
             align-items: center;
@@ -279,7 +310,7 @@
             position: relative;
         }
         .acc-body ul li::before {
-            content: '·';
+            content: '\00B7';
             position: absolute;
             left: 0;
             color: var(--text-3);
@@ -442,34 +473,6 @@
         }
         .footer strong { color: var(--text-2); font-weight: 600; }
 
-        /* ---- Session Nav ---- */
-        .session-nav {
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            padding: 0.5rem 1.5rem;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            white-space: nowrap;
-            text-align: center;
-        }
-        .session-nav a {
-            display: inline-block;
-            font-family: inherit;
-            font-size: 0.72rem;
-            font-weight: 500;
-            color: var(--text-3);
-            text-decoration: none;
-            padding: 0.4rem 0.6rem;
-            border-radius: 4px;
-            transition: color 0.15s, background 0.15s;
-        }
-        .session-nav a:hover { color: var(--text-2); background: var(--bg); }
-        .session-nav a.active {
-            color: var(--accent);
-            font-weight: 600;
-            background: var(--accent-bg);
-        }
-
         /* ---- Responsive ---- */
         @media (max-width: 600px) {
             .container { padding: 2rem 1.25rem 3rem; }
@@ -478,6 +481,7 @@
             .chain-step, .stage-step { border-right: none; border-bottom: 1px solid var(--border); }
             .chain-step:last-child, .stage-step:last-child { border-bottom: none; }
             .chain-detail, .stage-detail { border-radius: 0 0 8px 8px; }
+            .session-nav { justify-content: flex-start; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -488,12 +492,12 @@
 <body>
 
 <nav class="session-nav">
-    <a href="index.html" class="active">Session 1</a>
+    <a href="index.html">Session 1</a>
     <a href="session-2.html">Session 2</a>
     <a href="session-3.html">Session 3</a>
     <a href="session-4.html">Session 4</a>
     <a href="session-5.html">Session 5</a>
-    <a href="session-6.html">Session 6</a>
+    <a href="session-6.html" class="active">Session 6</a>
     <a href="session-7.html">Session 7</a>
     <a href="session-8.html">Session 8</a>
     <a href="session-9.html">Session 9</a>
@@ -503,49 +507,27 @@
 <div class="container">
 
     <header class="header">
-        <div class="header-label">Gambling Group — Single Session</div>
-        <h1>Understanding<br>the Problem</h1>
+        <div class="header-label">Gambling Group — Session 6</div>
+        <h1>Urge<br>Management</h1>
         <p class="subtitle">GEAR Program — Gambling Evaluation and Reduction</p>
     </header>
 
     <nav class="nav">
-        <button class="active" onclick="showPage(0, this)">Welcome</button>
-        <button onclick="showPage(1, this)">Understanding</button>
-        <button onclick="showPage(2, this)">Stages of Change</button>
-        <button onclick="showPage(3, this)">Discussion</button>
-        <button onclick="showPage(4, this)">Closing</button>
+        <button class="active" onclick="showPage(0, this)">Check-In</button>
+        <button onclick="showPage(1, this)">The Wave</button>
+        <button onclick="showPage(2, this)">Skills</button>
+        <button onclick="showPage(3, this)">Toolkit</button>
+        <button onclick="showPage(4, this)">Discussion</button>
+        <button onclick="showPage(5, this)">Closing</button>
     </nav>
 
 
-    <!-- ======================== WELCOME ======================== -->
+    <!-- ======================== CHECK-IN ======================== -->
     <div class="page active">
 
-        <div class="section-label warm">Welcome</div>
-        <h2><span class="timing">8 to 10 min</span>About today's group</h2>
+        <div class="section-label warm">Check-In</div>
+        <h2><span class="timing">8 to 10 min</span>Getting started</h2>
         <p class="body-text">
-            This group is about understanding gambling. Not judging where you are with it.
-            Wherever you are in your relationship with gambling is a valid starting point.
-        </p>
-        <p class="body-text">
-            We'll look at what gambling does, how it works, and what change actually looks like.
-            That includes looking honestly at patterns, without shame attached.
-            Understanding comes first. That's the work today.
-        </p>
-
-        <div class="callout warm" style="margin-top: 1.5rem;">
-            <div class="callout-label">Confidentiality</div>
-            <p>
-                What's shared here stays here. Everything in this group is confidential.
-                Names, stories, amounts, situations — all protected.
-                The one exception is safety. Outside of that, this is a safe space to be honest.
-            </p>
-        </div>
-
-        <hr class="divider">
-
-        <div class="section-label">Check-in</div>
-        <h2><span class="timing">8 to 10 min</span>Getting into it</h2>
-        <p class="body-text" style="margin-top: 0.25rem;">
             Share your name, then answer each of these. A sentence or two is fine.
         </p>
 
@@ -560,34 +542,36 @@
             <div class="step">
                 <div class="step-num">2</div>
                 <div class="step-content">
-                    <div class="step-q">When was the last time gambling crossed your mind?</div>
-                    <div class="step-hint">A thought, an urge, a memory, seeing an ad. Whatever it was.</div>
+                    <div class="step-q">Did you implement an access barrier this week?</div>
+                    <div class="step-hint">How did it go? What came up?</div>
                 </div>
             </div>
             <div class="step">
                 <div class="step-num">3</div>
                 <div class="step-content">
-                    <div class="step-q">What do you want to get out of today?</div>
-                    <div class="step-hint">Understanding, connection, something specific. Say what's true.</div>
+                    <div class="step-q">Any urges or gambling behavior this week?</div>
+                    <div class="step-hint">No judgment. Just honesty about what showed up.</div>
                 </div>
             </div>
         </div>
 
         <div class="page-nav">
-            <button class="ghost">← Back</button>
-            <button onclick="showPage(1)">Understanding →</button>
+            <button class="ghost">&larr; Back</button>
+            <button onclick="showPage(1)">The Wave &rarr;</button>
         </div>
     </div>
 
 
-    <!-- ======================== UNDERSTANDING THE PROBLEM ======================== -->
+    <!-- ======================== THE ANATOMY OF AN URGE ======================== -->
     <div class="page">
 
-        <div class="section-label warm">The Gambling Cycle</div>
-        <h2><span class="timing">15 to 20 min</span>How it actually works</h2>
+        <div class="section-label warm">The Anatomy of an Urge</div>
+        <h2><span class="timing">12 to 15 min</span>How urges actually work</h2>
         <p class="body-text">
-            Most gambling problems follow a recognizable cycle. Each step feeds the next.
-            Click any step to see how it works.
+            Most people think urges get stronger and stronger until you either give in or use superhuman willpower to resist. That's not how urges work.
+        </p>
+        <p class="body-text">
+            <strong>An urge is a wave.</strong> It rises, it peaks, and it falls — whether you gamble or not. The question isn't how to make the urge go away. The question is how to ride the wave until it passes.
         </p>
 
         <div class="chain">
@@ -597,196 +581,263 @@
             </div>
             <div class="chain-step" onclick="chainStep(1, this)">
                 <div class="chain-num">02</div>
-                <div class="chain-name">Urge</div>
+                <div class="chain-name">Rising</div>
             </div>
             <div class="chain-step" onclick="chainStep(2, this)">
                 <div class="chain-num">03</div>
-                <div class="chain-name">Gambling</div>
+                <div class="chain-name">Peak</div>
             </div>
             <div class="chain-step" onclick="chainStep(3, this)">
                 <div class="chain-num">04</div>
-                <div class="chain-name">Relief</div>
+                <div class="chain-name">Decline</div>
             </div>
             <div class="chain-step" onclick="chainStep(4, this)">
                 <div class="chain-num">05</div>
-                <div class="chain-name">Consequences</div>
-            </div>
-            <div class="chain-step" onclick="chainStep(5, this)">
-                <div class="chain-num">06</div>
-                <div class="chain-name">Shame</div>
+                <div class="chain-name">Passed</div>
             </div>
         </div>
 
         <div class="chain-detail active" id="cd0">
-            <p><strong>Stress, boredom, excitement, financial pressure.</strong> Something happens that activates the pattern. It can be external (a bad day, unexpected money) or internal (loneliness, restlessness). This is the entry point.</p>
-            <div class="chain-example">You get paid. Or you have a fight with someone. Or you're just sitting with nothing to do.</div>
+            <p><strong>Something activates the pattern.</strong> A trigger — emotional, environmental, or situational — starts the urge. This is the entry point, the same triggers you've been mapping in previous sessions.</p>
+            <div class="chain-example">You see a gambling ad. You get paid. You have a stressful phone call. You're bored on a Friday night.</div>
         </div>
         <div class="chain-detail" id="cd1">
-            <p><strong>The pull toward gambling builds.</strong> It might start as a thought, a memory of a win, or just a restless feeling. The urge is not a choice. It's wired into the pattern. The choice comes later.</p>
-            <div class="chain-example">"Just a quick one." "I'll set a limit this time." "I can feel it — tonight's the night."</div>
+            <p><strong>The urge builds.</strong> It gets stronger. Your brain starts telling you stories: "Just this once." "You can handle it." "You need this." The intensity increases. This is uncomfortable, but it's temporary.</p>
+            <div class="chain-example">Restless legs. Chest tightness. Racing thoughts about betting. The pull feels strong and getting stronger.</div>
         </div>
         <div class="chain-detail" id="cd2">
-            <p><strong>The behavior happens.</strong> Once in, the rules you set tend to dissolve. Chasing losses kicks in. Time distortion. The brain is getting intermittent reinforcement — near-misses are more activating than wins.</p>
-            <div class="chain-example">You said $50. It became $200. You won some back, then lost more trying to get even.</div>
+            <p><strong>Peak intensity — 15 to 20 minutes after the trigger.</strong> This is the hardest 3-5 minutes. The urge is loudest here. It says "this will never stop." It's lying. This is the top of the wave, not the beginning of forever.</p>
+            <div class="chain-example">Everything in your body is saying "do it." This is the moment where strategy matters most.</div>
         </div>
         <div class="chain-detail" id="cd3">
-            <p><strong>Short-term relief or a win.</strong> Something feels better, briefly. The tension drops. This is what the brain remembers. Even a loss can bring relief — at least the waiting is over.</p>
-            <div class="chain-example">For a moment, everything else disappears. The bills, the anxiety, the boredom. Just the game.</div>
+            <p><strong>The urge starts to ease.</strong> If you don't act on it, the intensity drops. Not because of willpower — because that's how urges work neurologically. They peak and decline on their own.</p>
+            <div class="chain-example">The tightness loosens. The thoughts slow down. You can think about something else. You're coming down the other side.</div>
         </div>
         <div class="chain-detail" id="cd4">
-            <p><strong>Financial, relational, emotional.</strong> The costs show up. Money gone. Time gone. Promises broken. Sometimes consequences are immediate. Sometimes they accumulate quietly.</p>
-            <div class="chain-example">Checking your balance the next morning. Lying about where you were. The slow erosion of trust.</div>
-        </div>
-        <div class="chain-detail" id="cd5">
-            <p><strong>Shame or stress feeds directly into the next trigger.</strong> The cycle closes. Guilt, self-criticism, or the stress of consequences becomes the very thing that activates the pattern again. This is why the cycle is hard to break from the inside.</p>
-            <div class="chain-example">"I'm never going to change." That thought itself becomes the next trigger.</div>
-        </div>
-
-        <div class="callout" style="margin-top: 0.5rem;">
-            <p>The cycle isn't weakness. It's a pattern, and patterns can change. Recognizing the cycle is the first step.</p>
+            <p><strong>The urge passes.</strong> You didn't gamble. You rode the wave. That counts. And every time you ride one out, the next one gets slightly shorter.</p>
+            <div class="chain-example">It's 30 minutes later. You're still here. You made it through.</div>
         </div>
 
         <hr class="divider">
 
-        <div class="section-label">Key concepts</div>
-        <h2>Building blocks</h2>
+        <div class="section-label">Why willpower fails</div>
+        <h2>Strategy, not strength</h2>
 
-        <div class="accordion">
-            <div class="acc-item open">
-                <div class="acc-header" onclick="toggleAcc(this)">
-                    <div class="acc-title">What is GEAR?</div>
-                    <div class="acc-icon">+</div>
-                </div>
-                <div class="acc-body">
-                    <p><strong>GEAR</strong> stands for Gambling Evaluation and Reduction Program. It's a structured way to understand and change gambling behavior. What makes it different: it starts with honest assessment before strategies.</p>
-                    <p>You can't find a route out of something you haven't mapped. The work in GEAR begins with looking clearly at what's actually happening, without layering shame on top of it.</p>
-                </div>
-            </div>
-            <div class="acc-item">
-                <div class="acc-header" onclick="toggleAcc(this)">
-                    <div class="acc-title">High-risk situations</div>
-                    <div class="acc-icon">+</div>
-                </div>
-                <div class="acc-body">
-                    <p>GEAR identifies four categories of personal high-risk situations.</p>
-                    <ul>
-                        <li><strong>Emotional states</strong> — stress, loneliness, celebration, boredom</li>
-                        <li><strong>Environments</strong> — certain places, times of day, particular people</li>
-                        <li><strong>Thoughts</strong> — "just this once," "I can win it back," "I deserve this"</li>
-                        <li><strong>Access</strong> — having money available, apps on the phone, ease of getting in</li>
-                    </ul>
-                    <div class="aside">Knowing your triggers gives you a decision point before the cycle starts. That's where the real leverage is.</div>
-                </div>
-            </div>
-            <div class="acc-item">
-                <div class="acc-header" onclick="toggleAcc(this)">
-                    <div class="acc-title">The function of gambling</div>
-                    <div class="acc-icon">+</div>
-                </div>
-                <div class="acc-body">
-                    <p>Gambling serves a function for most people. Escape. Excitement. Numbing. Social connection. Financial hope.</p>
-                    <p>Understanding what gambling does for you — not just what it costs you — is essential. That's not a trick question. It's an honest one.</p>
-                    <div class="aside">Recovery isn't about removing something without a replacement. It's about understanding the underlying need, and finding different ways to meet it.</div>
-                </div>
-            </div>
-            <div class="acc-item">
-                <div class="acc-header" onclick="toggleAcc(this)">
-                    <div class="acc-title">Honest assessment</div>
-                    <div class="acc-icon">+</div>
-                </div>
-                <div class="acc-body">
-                    <p>GEAR uses structured self-assessment to help people understand the full picture: how often, how much, and what impact.</p>
-                    <p>This is about clarity, not shame. Numbers and patterns aren't judgments. They're information.</p>
-                    <div class="aside">You cannot find a path through something you haven't named. Honest assessment is how you name it, on your own terms.</div>
-                </div>
-            </div>
+        <div class="callout warm">
+            <div class="callout-label">Key insight</div>
+            <p>
+                Willpower is a depleting resource — it gets weaker throughout the day. Relying on willpower alone puts you in a fight with your own brain. The goal is not white-knuckling through urges. It's having strategies that make the urge manageable.
+            </p>
         </div>
 
+        <p class="body-text">
+            You don't need infinite willpower. You need 20 minutes of strategy. That's it. The skills on the next page are those 20 minutes.
+        </p>
+
         <div class="page-nav">
-            <button onclick="showPage(0)">← Welcome</button>
-            <button onclick="showPage(2)">Stages of Change →</button>
+            <button onclick="showPage(0)">&larr; Check-In</button>
+            <button onclick="showPage(2)">Skills &rarr;</button>
         </div>
     </div>
 
 
-    <!-- ======================== STAGES OF CHANGE ======================== -->
+    <!-- ======================== SKILLS ======================== -->
     <div class="page">
 
-        <div class="section-label cool">Stages of Change</div>
-        <h2><span class="timing">12 to 15 min</span>Where are you right now?</h2>
+        <div class="section-label cool">Skill 1</div>
+        <h2><span class="timing">10 min</span>Urge Surfing</h2>
         <p class="body-text">
-            The Stages of Change model (Prochaska and DiClemente) shows that change happens in stages, not all at once.
-            Knowing your stage helps you use the right tools.
-            There's no stage that means you're behind.
+            Urge surfing comes from mindfulness-based relapse prevention. The idea is simple: instead of fighting the urge, you observe it. You watch the wave. You let it pass.
         </p>
 
-        <div class="stage-chain">
-            <div class="stage-step active" onclick="stageStep(0, this)">
-                <div class="stage-num">01</div>
-                <div class="stage-name">Pre-contemplation</div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <div class="step-q">Notice the urge</div>
+                    <div class="step-hint">Don't fight it. Don't judge it. Just notice: "I'm having an urge to gamble right now."</div>
+                </div>
             </div>
-            <div class="stage-step" onclick="stageStep(1, this)">
-                <div class="stage-num">02</div>
-                <div class="stage-name">Contemplation</div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <div class="step-q">Locate it in your body</div>
+                    <div class="step-hint">Where do you feel it? Chest tightness? Restless legs? A buzzing energy? Heat?</div>
+                </div>
             </div>
-            <div class="stage-step" onclick="stageStep(2, this)">
-                <div class="stage-num">03</div>
-                <div class="stage-name">Preparation</div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <div class="step-q">Observe without acting</div>
+                    <div class="step-hint">Watch the urge like a wave. It's rising. Note: "It's getting stronger." That's information, not a command.</div>
+                </div>
             </div>
-            <div class="stage-step" onclick="stageStep(3, this)">
-                <div class="stage-num">04</div>
-                <div class="stage-name">Action</div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                    <div class="step-q">Breathe through the peak</div>
+                    <div class="step-hint">The peak is the hardest 3-5 minutes. Breathe. It will pass.</div>
+                </div>
             </div>
-            <div class="stage-step" onclick="stageStep(4, this)">
-                <div class="stage-num">05</div>
-                <div class="stage-name">Maintenance</div>
+            <div class="step">
+                <div class="step-num">5</div>
+                <div class="step-content">
+                    <div class="step-q">Notice the decline</div>
+                    <div class="step-hint">"It's easing." You didn't gamble. You rode the wave. That counts.</div>
+                </div>
             </div>
         </div>
 
-        <div class="stage-detail active" id="sd0">
-            <p><strong>"I don't have a problem"</strong> or <strong>"I'm not ready."</strong></p>
-            <p>People here aren't necessarily in denial. They may genuinely not see the problem yet. Or they see it and don't feel ready to do anything about it. Both are real. Both are common.</p>
-            <p>Meeting someone in this stage means not pushing. It means offering information without pressure, staying curious. Pressure tends to backfire here.</p>
-        </div>
-        <div class="stage-detail" id="sd1">
-            <p><strong>"Maybe I have a problem, but I'm not sure I want to change."</strong></p>
-            <p>This is where ambivalence lives. Both sides are real at the same time: what gambling gives you, and what it costs you. That tension is uncomfortable, and it makes sense.</p>
-            <p>This stage can last a long time. That's normal. The goal here isn't resolution. It's honest exploration of both sides.</p>
-        </div>
-        <div class="stage-detail" id="sd2">
-            <p><strong>"I'm getting ready to do something."</strong></p>
-            <p>Starting to gather information, make small changes, or tell someone what's going on. The decision to change has been made. The plan is still forming.</p>
-            <p>The work here is planning. What would change look like for you, specifically? For your life, your triggers, your needs — not change in general.</p>
-        </div>
-        <div class="stage-detail" id="sd3">
-            <p><strong>Actively making changes.</strong></p>
-            <p>Reducing or stopping gambling. Using new coping strategies. Rebuilding finances, relationships, or daily routines.</p>
-            <p>This stage requires the most energy and the most support. It's also where the work becomes most visible to others. External support matters a great deal here.</p>
-        </div>
-        <div class="stage-detail" id="sd4">
-            <p><strong>Sustaining change over time.</strong></p>
-            <p>This is where relapse prevention becomes the main focus. High-risk situations don't disappear. They require ongoing awareness.</p>
-            <p>Most people move through these stages more than once. That's not failure. That's how change actually works. Each cycle builds understanding. Understanding builds durability.</p>
+        <div class="callout cool">
+            <div class="callout-label">Key point</div>
+            <p>
+                Urge surfing doesn't make the urge pleasant. It makes it survivable. And every time you survive one, you build evidence that you can survive the next.
+            </p>
         </div>
 
         <hr class="divider">
 
-        <div class="section-label cool">Reflection</div>
-        <h2>Where are you today?</h2>
+        <div class="section-label cool">Skill 2</div>
+        <h2><span class="timing">5 min</span>The HALT Check</h2>
         <p class="body-text">
-            This is just for you. You don't need to commit to an answer, and it can change from day to day.
+            Before responding to an urge, run a quick diagnostic. Are you in one of these states? If so, handle that first. The urge may decrease on its own once the underlying state is addressed.
         </p>
 
-        <div class="callout cool" style="margin-top: 1rem;">
-            <p>
-                Being here, even without a plan to change, is worth something.
-                A lot of understanding starts right here. Gathering information is its own form of movement.
-            </p>
+        <div class="accordion">
+            <div class="acc-item open">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">H — Hungry</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>Low blood sugar lowers impulse control. Eat something. It sounds too simple, but it's real neuroscience. Your brain needs fuel to make good decisions.</p>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">A — Angry</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>Unprocessed anger drives impulsive behavior. Name the anger. Who are you mad at? What happened? Anger that stays unnamed turns into action — often the wrong kind.</p>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">L — Lonely</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>Isolation is a top trigger for escape gambling. Call someone. Text someone. Go somewhere with people. Loneliness makes urges louder because there's no competing input.</p>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">T — Tired</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>Fatigue destroys decision-making. When you're exhausted, your brain takes shortcuts — and gambling is a well-worn shortcut. Rest if you can. Even 20 minutes changes the equation.</p>
+                </div>
+            </div>
         </div>
 
         <div class="page-nav">
-            <button onclick="showPage(1)">← Understanding</button>
-            <button onclick="showPage(3)">Discussion →</button>
+            <button onclick="showPage(1)">&larr; The Wave</button>
+            <button onclick="showPage(3)">Toolkit &rarr;</button>
+        </div>
+    </div>
+
+
+    <!-- ======================== COMPETING RESPONSE TOOLKIT ======================== -->
+    <div class="page">
+
+        <div class="section-label warm">Skill 3</div>
+        <h2><span class="timing">8 min</span>Building your toolkit</h2>
+        <p class="body-text">
+            When an urge hits, you need a specific alternative behavior that is immediately available and at least somewhat rewarding. Vague plans don't work. "I'll do something else" fails. "I'll call Mike and go for a walk" works.
+        </p>
+
+        <h3 style="margin-top: 1.5rem;">Your "instead" plan</h3>
+        <p class="body-text">Think through each of these scenarios. Your answer needs to be specific and realistic — something you could actually do in that moment.</p>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <div class="step-q">At home, bored</div>
+                    <div class="step-hint">What specific thing would you do instead? Name it.</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <div class="step-q">After a stressful day</div>
+                    <div class="step-hint">What would actually help with the stress — not just distract from it?</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <div class="step-q">When you have unexpected money</div>
+                    <div class="step-hint">What do you do with it before the urge takes over?</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                    <div class="step-q">Late at night, alone</div>
+                    <div class="step-hint">This is the hardest one. What's actually available to you at 11pm?</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">5</div>
+                <div class="step-content">
+                    <div class="step-q">When you see a gambling ad</div>
+                    <div class="step-hint">What do you do in the 10 seconds after the trigger?</div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="section-label">The 3 D's</div>
+        <h2>Delay, Distract, Disclose</h2>
+
+        <div class="accordion">
+            <div class="acc-item open">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">Delay — Wait 20 minutes</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>Set a timer. That's it. You're not saying "never." You're saying "not yet." Twenty minutes is enough for the wave to peak and start declining. Most urges won't survive the timer.</p>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">Distract — Do the alternative</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>Use your "instead" plan. The alternative doesn't need to be as good as gambling. It needs to occupy your brain for 20 minutes. Walk. Call someone. Cook. Play a game. Anything with enough friction to slow the cycle.</p>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">Disclose — Tell someone what's happening</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>Say it out loud. Text someone: "I'm having an urge right now." Isolation feeds the cycle. Disclosure breaks it. You don't need advice. You need a witness.</p>
+                    <div class="aside">The "instead" plan should involve another person when possible. It must be immediately available — not something that requires setup. And it should provide some form of relief or reward — not punishment.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-nav">
+            <button onclick="showPage(2)">&larr; Skills</button>
+            <button onclick="showPage(4)">Discussion &rarr;</button>
         </div>
     </div>
 
@@ -795,43 +846,35 @@
     <div class="page">
 
         <div class="section-label warm">Discussion</div>
-        <h2><span class="timing">20 to 25 min</span>Open it up</h2>
+        <h2><span class="timing">10 to 12 min</span>Open it up</h2>
         <p class="body-text">
             These questions are starting points. Take them wherever feels useful.
-            No answer is wrong. Take them wherever feels useful.
         </p>
 
         <div class="questions">
             <div class="question">
-                <div class="question-label">Opening</div>
-                <div class="question-text">Where do you think you are in the stages of change right now? You don't need to commit to an answer.</div>
+                <div class="question-label">Experience</div>
+                <div class="question-text">Has anyone tried to ride out an urge before? What happened?</div>
             </div>
             <div class="question">
-                <div class="question-label">The cycle</div>
-                <div class="question-text">Can you recognize any part of the gambling cycle in your own experience? What part is most familiar?</div>
+                <div class="question-label">The body</div>
+                <div class="question-text">What does your urge feel like physically? Where do you feel it?</div>
+                <div class="question-note">Chest, legs, hands, stomach — everyone's different.</div>
             </div>
             <div class="question">
-                <div class="question-label">Function</div>
-                <div class="question-text">What does gambling do for you? What need does it meet?</div>
-                <div class="question-note">Make space for honest answers here. This is not a trick question.</div>
+                <div class="question-label">What's worked</div>
+                <div class="question-text">What has worked for you in the past when you resisted gambling? What didn't work?</div>
             </div>
             <div class="question">
-                <div class="question-label">High-risk</div>
-                <div class="question-text">What's one situation that makes it hardest to resist gambling?</div>
+                <div class="question-label">The distinction</div>
+                <div class="question-text">What's the difference between managing urges and eliminating them? Does that distinction matter to you?</div>
+                <div class="question-note">Managing is the realistic goal. Eliminating is the fantasy. Understanding the difference changes the work.</div>
             </div>
-            <div class="question">
-                <div class="question-label">Closing round</div>
-                <div class="question-text">What's one thing you want to understand better about your own relationship with gambling?</div>
-            </div>
-        </div>
-
-        <div class="callout">
-            <p>Go at whatever pace the group needs. Some questions may take more time than others. That's okay.</p>
         </div>
 
         <div class="page-nav">
-            <button onclick="showPage(2)">← Stages of Change</button>
-            <button onclick="showPage(4)">Closing →</button>
+            <button onclick="showPage(3)">&larr; Toolkit</button>
+            <button onclick="showPage(5)">Closing &rarr;</button>
         </div>
     </div>
 
@@ -847,32 +890,30 @@
             <div class="step">
                 <div class="step-num">1</div>
                 <div class="step-content">
-                    <div class="step-q">What's one thing from today that stuck with you?</div>
-                    <div class="step-hint">Something you heard, something you recognized, something that surprised you.</div>
+                    <div class="step-q">What's one urge management tool you want to try this week?</div>
+                    <div class="step-hint">Urge surfing, HALT, the 3 D's, a specific competing response — pick one.</div>
                 </div>
             </div>
             <div class="step">
                 <div class="step-num">2</div>
                 <div class="step-content">
-                    <div class="step-q">What's one thing you want to pay attention to this week?</div>
-                    <div class="step-hint">A trigger, a pattern, a situation. Something concrete.</div>
+                    <div class="step-q">What's your strongest "instead" plan?</div>
+                    <div class="step-hint">The most realistic thing you'd actually do instead of gambling. Name it specifically.</div>
                 </div>
             </div>
             <div class="step">
                 <div class="step-num">3</div>
                 <div class="step-content">
-                    <div class="step-q">How are you leaving compared to how you walked in?</div>
-                    <div class="step-hint">Different, the same, heavier, lighter. Whatever is honest.</div>
+                    <div class="step-q">Between-session task</div>
+                    <div class="step-hint">If an urge hits this week, try to ride it for 20 minutes before deciding what to do. Set a timer. Notice what happens.</div>
                 </div>
             </div>
         </div>
 
         <div class="callout warm" style="margin-top: 2rem;">
-            <div class="callout-label">Facilitator note</div>
+            <div class="callout-label">The bottom line</div>
             <p>
-                Understanding the problem is not the same as solving it.
-                But you cannot find your way through something you haven't named.
-                You did that today.
+                The urge is lying to you. It says "this will never stop." It always stops. You don't need to be stronger than the urge. You need to outlast it. And that takes about 20 minutes.
             </p>
         </div>
 
@@ -885,7 +926,7 @@
         </div>
 
         <div class="page-nav">
-            <button onclick="showPage(3)">← Discussion</button>
+            <button onclick="showPage(4)">&larr; Discussion</button>
             <button onclick="showPage(0)">Start over</button>
         </div>
     </div>
@@ -893,8 +934,8 @@
 
     <div class="footer">
         <strong>Support is always available</strong><br>
-        National Problem Gambling Helpline: <strong>1-800-522-4700</strong> · Text: <strong>HELPLINE to 233777</strong><br>
-        Crisis Text Line: text HOME to 741741 · 988 Lifeline: call or text 988
+        National Problem Gambling Helpline: <strong>1-800-522-4700</strong> &middot; Text: <strong>HELPLINE to 233777</strong><br>
+        Crisis Text Line: text HOME to 741741 &middot; 988 Lifeline: call or text 988
     </div>
 
 </div>
@@ -909,19 +950,18 @@
     function chainStep(i, el) {
         document.querySelectorAll('.chain-step').forEach(s => s.classList.remove('active'));
         el.classList.add('active');
-        for (let j = 0; j < 6; j++) document.getElementById('cd' + j).classList.toggle('active', j === i);
+        document.querySelectorAll('.chain-detail').forEach((d, j) => d.classList.toggle('active', j === i));
     }
 
     function stageStep(i, el) {
         document.querySelectorAll('.stage-step').forEach(s => s.classList.remove('active'));
         el.classList.add('active');
-        for (let j = 0; j < 5; j++) document.getElementById('sd' + j).classList.toggle('active', j === i);
+        document.querySelectorAll('.stage-detail').forEach((d, j) => d.classList.toggle('active', j === i));
     }
 
     function toggleAcc(header) {
         header.closest('.acc-item').classList.toggle('open');
     }
-
 </script>
 </body>
 </html>

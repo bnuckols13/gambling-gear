@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Understanding the Problem — GEAR Program</title>
+    <title>Access — Money and Technology — GEAR Program</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -37,6 +37,36 @@
             display: block;
             height: 3px;
             background: var(--accent);
+        }
+
+        /* ---- Session Nav ---- */
+        .session-nav {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 0.5rem 1.5rem;
+            display: flex;
+            gap: 0.15rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .session-nav a {
+            font-family: inherit;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--text-3);
+            text-decoration: none;
+            padding: 0.35rem 0.55rem;
+            border-radius: 4px;
+            white-space: nowrap;
+            transition: color 0.15s, background 0.15s;
+        }
+        .session-nav a:hover { color: var(--text-2); background: var(--bg); }
+        .session-nav a.active {
+            color: var(--accent);
+            font-weight: 600;
+            background: var(--accent-bg);
         }
 
         .container {
@@ -279,7 +309,7 @@
             position: relative;
         }
         .acc-body ul li::before {
-            content: '·';
+            content: '\00B7';
             position: absolute;
             left: 0;
             color: var(--text-3);
@@ -442,34 +472,6 @@
         }
         .footer strong { color: var(--text-2); font-weight: 600; }
 
-        /* ---- Session Nav ---- */
-        .session-nav {
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            padding: 0.5rem 1.5rem;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            white-space: nowrap;
-            text-align: center;
-        }
-        .session-nav a {
-            display: inline-block;
-            font-family: inherit;
-            font-size: 0.72rem;
-            font-weight: 500;
-            color: var(--text-3);
-            text-decoration: none;
-            padding: 0.4rem 0.6rem;
-            border-radius: 4px;
-            transition: color 0.15s, background 0.15s;
-        }
-        .session-nav a:hover { color: var(--text-2); background: var(--bg); }
-        .session-nav a.active {
-            color: var(--accent);
-            font-weight: 600;
-            background: var(--accent-bg);
-        }
-
         /* ---- Responsive ---- */
         @media (max-width: 600px) {
             .container { padding: 2rem 1.25rem 3rem; }
@@ -478,6 +480,7 @@
             .chain-step, .stage-step { border-right: none; border-bottom: 1px solid var(--border); }
             .chain-step:last-child, .stage-step:last-child { border-bottom: none; }
             .chain-detail, .stage-detail { border-radius: 0 0 8px 8px; }
+            .session-nav { justify-content: flex-start; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -488,11 +491,11 @@
 <body>
 
 <nav class="session-nav">
-    <a href="index.html" class="active">Session 1</a>
+    <a href="index.html">Session 1</a>
     <a href="session-2.html">Session 2</a>
     <a href="session-3.html">Session 3</a>
     <a href="session-4.html">Session 4</a>
-    <a href="session-5.html">Session 5</a>
+    <a href="session-5.html" class="active">Session 5</a>
     <a href="session-6.html">Session 6</a>
     <a href="session-7.html">Session 7</a>
     <a href="session-8.html">Session 8</a>
@@ -503,49 +506,27 @@
 <div class="container">
 
     <header class="header">
-        <div class="header-label">Gambling Group — Single Session</div>
-        <h1>Understanding<br>the Problem</h1>
+        <div class="header-label">Gambling Group — Session 5</div>
+        <h1>Access — Money<br>and Technology</h1>
         <p class="subtitle">GEAR Program — Gambling Evaluation and Reduction</p>
     </header>
 
     <nav class="nav">
-        <button class="active" onclick="showPage(0, this)">Welcome</button>
-        <button onclick="showPage(1, this)">Understanding</button>
-        <button onclick="showPage(2, this)">Stages of Change</button>
-        <button onclick="showPage(3, this)">Discussion</button>
-        <button onclick="showPage(4, this)">Closing</button>
+        <button class="active" onclick="showPage(0, this)">Check-In</button>
+        <button onclick="showPage(1, this)">Access</button>
+        <button onclick="showPage(2, this)">Barrier Tools</button>
+        <button onclick="showPage(3, this)">Audit</button>
+        <button onclick="showPage(4, this)">Discussion</button>
+        <button onclick="showPage(5, this)">Closing</button>
     </nav>
 
 
-    <!-- ======================== WELCOME ======================== -->
+    <!-- ======================== CHECK-IN ======================== -->
     <div class="page active">
 
-        <div class="section-label warm">Welcome</div>
-        <h2><span class="timing">8 to 10 min</span>About today's group</h2>
+        <div class="section-label warm">Check-In</div>
+        <h2><span class="timing">8 to 10 min</span>Getting started</h2>
         <p class="body-text">
-            This group is about understanding gambling. Not judging where you are with it.
-            Wherever you are in your relationship with gambling is a valid starting point.
-        </p>
-        <p class="body-text">
-            We'll look at what gambling does, how it works, and what change actually looks like.
-            That includes looking honestly at patterns, without shame attached.
-            Understanding comes first. That's the work today.
-        </p>
-
-        <div class="callout warm" style="margin-top: 1.5rem;">
-            <div class="callout-label">Confidentiality</div>
-            <p>
-                What's shared here stays here. Everything in this group is confidential.
-                Names, stories, amounts, situations — all protected.
-                The one exception is safety. Outside of that, this is a safe space to be honest.
-            </p>
-        </div>
-
-        <hr class="divider">
-
-        <div class="section-label">Check-in</div>
-        <h2><span class="timing">8 to 10 min</span>Getting into it</h2>
-        <p class="body-text" style="margin-top: 0.25rem;">
             Share your name, then answer each of these. A sentence or two is fine.
         </p>
 
@@ -560,233 +541,250 @@
             <div class="step">
                 <div class="step-num">2</div>
                 <div class="step-content">
-                    <div class="step-q">When was the last time gambling crossed your mind?</div>
-                    <div class="step-hint">A thought, an urge, a memory, seeing an ad. Whatever it was.</div>
+                    <div class="step-q">Did you catch any triggers this week?</div>
+                    <div class="step-hint">Were you able to name them when they showed up?</div>
                 </div>
             </div>
             <div class="step">
                 <div class="step-num">3</div>
                 <div class="step-content">
-                    <div class="step-q">What do you want to get out of today?</div>
-                    <div class="step-hint">Understanding, connection, something specific. Say what's true.</div>
+                    <div class="step-q">Any gambling behavior or close calls?</div>
+                    <div class="step-hint">No judgment. Just honesty about what happened.</div>
                 </div>
             </div>
         </div>
 
         <div class="page-nav">
-            <button class="ghost">← Back</button>
-            <button onclick="showPage(1)">Understanding →</button>
+            <button class="ghost">&larr; Back</button>
+            <button onclick="showPage(1)">Access &rarr;</button>
         </div>
     </div>
 
 
-    <!-- ======================== UNDERSTANDING THE PROBLEM ======================== -->
+    <!-- ======================== WHY ACCESS MATTERS ======================== -->
     <div class="page">
 
-        <div class="section-label warm">The Gambling Cycle</div>
-        <h2><span class="timing">15 to 20 min</span>How it actually works</h2>
+        <div class="section-label warm">Why Access Matters</div>
+        <h2><span class="timing">10 to 12 min</span>The one thing you can control structurally</h2>
         <p class="body-text">
-            Most gambling problems follow a recognizable cycle. Each step feeds the next.
-            Click any step to see how it works.
+            Of the four trigger categories we've talked about — emotions, environments, thoughts, access — access is the one you have the most structural control over. You can't stop feeling stressed. You can delete a betting app.
+        </p>
+        <p class="body-text">
+            This session is about making gambling harder to do. Not willpower. Structure.
         </p>
 
-        <div class="chain">
-            <div class="chain-step active" onclick="chainStep(0, this)">
-                <div class="chain-num">01</div>
-                <div class="chain-name">Trigger</div>
-            </div>
-            <div class="chain-step" onclick="chainStep(1, this)">
-                <div class="chain-num">02</div>
-                <div class="chain-name">Urge</div>
-            </div>
-            <div class="chain-step" onclick="chainStep(2, this)">
-                <div class="chain-num">03</div>
-                <div class="chain-name">Gambling</div>
-            </div>
-            <div class="chain-step" onclick="chainStep(3, this)">
-                <div class="chain-num">04</div>
-                <div class="chain-name">Relief</div>
-            </div>
-            <div class="chain-step" onclick="chainStep(4, this)">
-                <div class="chain-num">05</div>
-                <div class="chain-name">Consequences</div>
-            </div>
-            <div class="chain-step" onclick="chainStep(5, this)">
-                <div class="chain-num">06</div>
-                <div class="chain-name">Shame</div>
-            </div>
-        </div>
-
-        <div class="chain-detail active" id="cd0">
-            <p><strong>Stress, boredom, excitement, financial pressure.</strong> Something happens that activates the pattern. It can be external (a bad day, unexpected money) or internal (loneliness, restlessness). This is the entry point.</p>
-            <div class="chain-example">You get paid. Or you have a fight with someone. Or you're just sitting with nothing to do.</div>
-        </div>
-        <div class="chain-detail" id="cd1">
-            <p><strong>The pull toward gambling builds.</strong> It might start as a thought, a memory of a win, or just a restless feeling. The urge is not a choice. It's wired into the pattern. The choice comes later.</p>
-            <div class="chain-example">"Just a quick one." "I'll set a limit this time." "I can feel it — tonight's the night."</div>
-        </div>
-        <div class="chain-detail" id="cd2">
-            <p><strong>The behavior happens.</strong> Once in, the rules you set tend to dissolve. Chasing losses kicks in. Time distortion. The brain is getting intermittent reinforcement — near-misses are more activating than wins.</p>
-            <div class="chain-example">You said $50. It became $200. You won some back, then lost more trying to get even.</div>
-        </div>
-        <div class="chain-detail" id="cd3">
-            <p><strong>Short-term relief or a win.</strong> Something feels better, briefly. The tension drops. This is what the brain remembers. Even a loss can bring relief — at least the waiting is over.</p>
-            <div class="chain-example">For a moment, everything else disappears. The bills, the anxiety, the boredom. Just the game.</div>
-        </div>
-        <div class="chain-detail" id="cd4">
-            <p><strong>Financial, relational, emotional.</strong> The costs show up. Money gone. Time gone. Promises broken. Sometimes consequences are immediate. Sometimes they accumulate quietly.</p>
-            <div class="chain-example">Checking your balance the next morning. Lying about where you were. The slow erosion of trust.</div>
-        </div>
-        <div class="chain-detail" id="cd5">
-            <p><strong>Shame or stress feeds directly into the next trigger.</strong> The cycle closes. Guilt, self-criticism, or the stress of consequences becomes the very thing that activates the pattern again. This is why the cycle is hard to break from the inside.</p>
-            <div class="chain-example">"I'm never going to change." That thought itself becomes the next trigger.</div>
-        </div>
-
-        <div class="callout" style="margin-top: 0.5rem;">
-            <p>The cycle isn't weakness. It's a pattern, and patterns can change. Recognizing the cycle is the first step.</p>
+        <div class="callout warm" style="margin-top: 1.5rem;">
+            <div class="callout-label">The reality in 2026</div>
+            <p>
+                Online gambling has eliminated nearly all natural barriers. No travel, no cash, no social visibility. Sports betting apps use push notifications designed to trigger action during live events. The average distance between urge and bet is now about 3 seconds and a thumbprint.
+            </p>
         </div>
 
         <hr class="divider">
 
         <div class="section-label">Key concepts</div>
-        <h2>Building blocks</h2>
+        <h2>How access fuels the cycle</h2>
 
         <div class="accordion">
             <div class="acc-item open">
                 <div class="acc-header" onclick="toggleAcc(this)">
-                    <div class="acc-title">What is GEAR?</div>
+                    <div class="acc-title">The access problem</div>
                     <div class="acc-icon">+</div>
                 </div>
                 <div class="acc-body">
-                    <p><strong>GEAR</strong> stands for Gambling Evaluation and Reduction Program. It's a structured way to understand and change gambling behavior. What makes it different: it starts with honest assessment before strategies.</p>
-                    <p>You can't find a route out of something you haven't mapped. The work in GEAR begins with looking clearly at what's actually happening, without layering shame on top of it.</p>
-                </div>
-            </div>
-            <div class="acc-item">
-                <div class="acc-header" onclick="toggleAcc(this)">
-                    <div class="acc-title">High-risk situations</div>
-                    <div class="acc-icon">+</div>
-                </div>
-                <div class="acc-body">
-                    <p>GEAR identifies four categories of personal high-risk situations.</p>
+                    <p>Online gambling has removed the friction that used to slow people down. No driving to a casino. No converting cash. No one watching you walk in.</p>
                     <ul>
-                        <li><strong>Emotional states</strong> — stress, loneliness, celebration, boredom</li>
-                        <li><strong>Environments</strong> — certain places, times of day, particular people</li>
-                        <li><strong>Thoughts</strong> — "just this once," "I can win it back," "I deserve this"</li>
-                        <li><strong>Access</strong> — having money available, apps on the phone, ease of getting in</li>
+                        <li>Sports betting apps send push notifications during live games</li>
+                        <li>Daily fantasy sports and social casino apps normalize gambling behavior</li>
+                        <li>Crypto trading and high-risk stock speculation function as gambling for many people</li>
                     </ul>
-                    <div class="aside">Knowing your triggers gives you a decision point before the cycle starts. That's where the real leverage is.</div>
+                    <div class="aside">The easier it is to gamble, the less time there is between urge and action. That gap is where your choices live.</div>
                 </div>
             </div>
             <div class="acc-item">
                 <div class="acc-header" onclick="toggleAcc(this)">
-                    <div class="acc-title">The function of gambling</div>
+                    <div class="acc-title">Financial access as fuel</div>
                     <div class="acc-icon">+</div>
                 </div>
                 <div class="acc-body">
-                    <p>Gambling serves a function for most people. Escape. Excitement. Numbing. Social connection. Financial hope.</p>
-                    <p>Understanding what gambling does for you — not just what it costs you — is essential. That's not a trick question. It's an honest one.</p>
-                    <div class="aside">Recovery isn't about removing something without a replacement. It's about understanding the underlying need, and finding different ways to meet it.</div>
+                    <p>Available money is the single strongest predictor of a gambling episode. Payday, bonuses, tax refunds, gifts — all create access windows.</p>
+                    <p>Credit cards, overdraft lines, and borrowing extend the window beyond what you actually have.</p>
+                    <div class="aside">Most people don't plan to gamble $500. They plan to gamble $50. Access to the other $450 is what turns a slip into a crisis.</div>
                 </div>
             </div>
             <div class="acc-item">
                 <div class="acc-header" onclick="toggleAcc(this)">
-                    <div class="acc-title">Honest assessment</div>
+                    <div class="acc-title">The shame-financial stress cycle</div>
                     <div class="acc-icon">+</div>
                 </div>
                 <div class="acc-body">
-                    <p>GEAR uses structured self-assessment to help people understand the full picture: how often, how much, and what impact.</p>
-                    <p>This is about clarity, not shame. Numbers and patterns aren't judgments. They're information.</p>
-                    <div class="aside">You cannot find a path through something you haven't named. Honest assessment is how you name it, on your own terms.</div>
+                    <p>Financial stress from gambling losses creates shame. Shame is painful. Gambling relieves pain temporarily. More gambling creates more financial stress. The cycle closes on itself.</p>
+                    <p>Putting access barriers in place doesn't fix the shame. But it interrupts the cycle at its most concrete point — the money.</p>
                 </div>
             </div>
         </div>
 
         <div class="page-nav">
-            <button onclick="showPage(0)">← Welcome</button>
-            <button onclick="showPage(2)">Stages of Change →</button>
+            <button onclick="showPage(0)">&larr; Check-In</button>
+            <button onclick="showPage(2)">Barrier Tools &rarr;</button>
         </div>
     </div>
 
 
-    <!-- ======================== STAGES OF CHANGE ======================== -->
+    <!-- ======================== BARRIER TOOLS ======================== -->
     <div class="page">
 
-        <div class="section-label cool">Stages of Change</div>
-        <h2><span class="timing">12 to 15 min</span>Where are you right now?</h2>
+        <div class="section-label cool">Barrier Tools</div>
+        <h2><span class="timing">10 min</span>What's actually available</h2>
         <p class="body-text">
-            The Stages of Change model (Prochaska and DiClemente) shows that change happens in stages, not all at once.
-            Knowing your stage helps you use the right tools.
-            There's no stage that means you're behind.
+            These are concrete tools you can use to put distance between an urge and a bet. None of them are perfect. All of them make gambling harder to do. Click each one to learn more.
         </p>
 
-        <div class="stage-chain">
-            <div class="stage-step active" onclick="stageStep(0, this)">
-                <div class="stage-num">01</div>
-                <div class="stage-name">Pre-contemplation</div>
+        <div class="accordion">
+            <div class="acc-item open">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">Self-Exclusion</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>A voluntary ban from PA casinos and online gambling sites through <strong>responsibleplay.pa.gov</strong>.</p>
+                    <ul>
+                        <li>Duration options: 1 year, 5 years, or lifetime</li>
+                        <li>Covers both in-person and online gambling in PA</li>
+                        <li>Enforcement is imperfect, especially online — it's a barrier, not a wall</li>
+                    </ul>
+                    <div class="aside">Starting with a shorter commitment is still a commitment. You don't have to sign up for lifetime to take this step.</div>
+                </div>
             </div>
-            <div class="stage-step" onclick="stageStep(1, this)">
-                <div class="stage-num">02</div>
-                <div class="stage-name">Contemplation</div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">Gamban</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>Software that blocks gambling sites and apps across <strong>all your devices</strong>. Available at <strong>gamban.com</strong>.</p>
+                    <ul>
+                        <li>Most comprehensive blocker available</li>
+                        <li>About $3/month</li>
+                        <li>Can't be easily bypassed — that's the point</li>
+                    </ul>
+                    <div class="aside">Gamban has subscription periods. It doesn't have to be permanent to be useful.</div>
+                </div>
             </div>
-            <div class="stage-step" onclick="stageStep(2, this)">
-                <div class="stage-num">03</div>
-                <div class="stage-name">Preparation</div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">Device Controls (Apple)</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>Give your App Store password to a support person and have them change it. This prevents downloading gambling apps.</p>
+                    <ul>
+                        <li>Screen Time restrictions can also limit app categories</li>
+                        <li>A trusted person holds the password — you keep the phone</li>
+                    </ul>
+                </div>
             </div>
-            <div class="stage-step" onclick="stageStep(3, this)">
-                <div class="stage-num">04</div>
-                <div class="stage-name">Action</div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">TrueLink Card</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>A prepaid card with configurable spending controls, available at <strong>truelinkfinancial.com</strong>.</p>
+                    <ul>
+                        <li>Can block gambling transactions by merchant category</li>
+                        <li>It's your own account — maintains dignity while adding structure</li>
+                        <li>You control the limits, or you can set them with a support person</li>
+                    </ul>
+                </div>
             </div>
-            <div class="stage-step" onclick="stageStep(4, this)">
-                <div class="stage-num">05</div>
-                <div class="stage-name">Maintenance</div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">Banking Controls</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p>Changes you can make to your existing bank accounts to reduce gambling access.</p>
+                    <ul>
+                        <li>Set up transaction alerts on all accounts</li>
+                        <li>Remove overdraft protection — prevents betting beyond your balance</li>
+                        <li>Separate "gambling-free" checking account for bills and essentials</li>
+                        <li>Close or freeze credit cards used for gambling deposits</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
-        <div class="stage-detail active" id="sd0">
-            <p><strong>"I don't have a problem"</strong> or <strong>"I'm not ready."</strong></p>
-            <p>People here aren't necessarily in denial. They may genuinely not see the problem yet. Or they see it and don't feel ready to do anything about it. Both are real. Both are common.</p>
-            <p>Meeting someone in this stage means not pushing. It means offering information without pressure, staying curious. Pressure tends to backfire here.</p>
-        </div>
-        <div class="stage-detail" id="sd1">
-            <p><strong>"Maybe I have a problem, but I'm not sure I want to change."</strong></p>
-            <p>This is where ambivalence lives. Both sides are real at the same time: what gambling gives you, and what it costs you. That tension is uncomfortable, and it makes sense.</p>
-            <p>This stage can last a long time. That's normal. The goal here isn't resolution. It's honest exploration of both sides.</p>
-        </div>
-        <div class="stage-detail" id="sd2">
-            <p><strong>"I'm getting ready to do something."</strong></p>
-            <p>Starting to gather information, make small changes, or tell someone what's going on. The decision to change has been made. The plan is still forming.</p>
-            <p>The work here is planning. What would change look like for you, specifically? For your life, your triggers, your needs — not change in general.</p>
-        </div>
-        <div class="stage-detail" id="sd3">
-            <p><strong>Actively making changes.</strong></p>
-            <p>Reducing or stopping gambling. Using new coping strategies. Rebuilding finances, relationships, or daily routines.</p>
-            <p>This stage requires the most energy and the most support. It's also where the work becomes most visible to others. External support matters a great deal here.</p>
-        </div>
-        <div class="stage-detail" id="sd4">
-            <p><strong>Sustaining change over time.</strong></p>
-            <p>This is where relapse prevention becomes the main focus. High-risk situations don't disappear. They require ongoing awareness.</p>
-            <p>Most people move through these stages more than once. That's not failure. That's how change actually works. Each cycle builds understanding. Understanding builds durability.</p>
-        </div>
-
-        <hr class="divider">
-
-        <div class="section-label cool">Reflection</div>
-        <h2>Where are you today?</h2>
-        <p class="body-text">
-            This is just for you. You don't need to commit to an answer, and it can change from day to day.
-        </p>
-
-        <div class="callout cool" style="margin-top: 1rem;">
+        <div class="callout cool">
             <p>
-                Being here, even without a plan to change, is worth something.
-                A lot of understanding starts right here. Gathering information is its own form of movement.
+                Putting up barriers can feel like admitting you can't trust yourself. That's a hard truth to sit with. But barriers aren't about trust — they're about not making your life harder than it needs to be.
             </p>
         </div>
 
         <div class="page-nav">
-            <button onclick="showPage(1)">← Understanding</button>
-            <button onclick="showPage(3)">Discussion →</button>
+            <button onclick="showPage(1)">&larr; Access</button>
+            <button onclick="showPage(3)">Audit &rarr;</button>
+        </div>
+    </div>
+
+
+    <!-- ======================== PERSONAL ACCESS AUDIT ======================== -->
+    <div class="page">
+
+        <div class="section-label warm">Exercise</div>
+        <h2><span class="timing">10 to 12 min</span>Personal access audit</h2>
+        <p class="body-text">
+            Right now, how easy is it for you to gamble? Be honest. Walk through each of these.
+        </p>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <div class="step-q">Phone</div>
+                    <div class="step-hint">Do you have gambling apps installed? Sports betting? DFS? Social casino? How many taps from your home screen to placing a bet?</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <div class="step-q">Computer</div>
+                    <div class="step-hint">Gambling sites bookmarked? Saved passwords? Auto-fill active?</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <div class="step-q">Money</div>
+                    <div class="step-hint">Do you have immediate access to cash or credit you could gamble with? How much could you access in the next 30 minutes if you wanted to?</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                    <div class="step-q">Venues</div>
+                    <div class="step-hint">How close is the nearest casino, bar with VLTs, or gas station with lottery? Do you pass one on your commute?</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">5</div>
+                <div class="step-content">
+                    <div class="step-q">Barriers already in place</div>
+                    <div class="step-hint">Have you self-excluded? Installed blockers? Given up financial control? Changed passwords?</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout warm" style="margin-top: 1.5rem;">
+            <div class="callout-label">No judgment</div>
+            <p>
+                If the answer to most of these is "very easy" — that's not a judgment. That's information. And it's fixable. The point of this audit is to see what's actually in front of you, clearly.
+            </p>
+        </div>
+
+        <div class="page-nav">
+            <button onclick="showPage(2)">&larr; Barrier Tools</button>
+            <button onclick="showPage(4)">Discussion &rarr;</button>
         </div>
     </div>
 
@@ -795,43 +793,34 @@
     <div class="page">
 
         <div class="section-label warm">Discussion</div>
-        <h2><span class="timing">20 to 25 min</span>Open it up</h2>
+        <h2><span class="timing">12 to 15 min</span>Open it up</h2>
         <p class="body-text">
             These questions are starting points. Take them wherever feels useful.
-            No answer is wrong. Take them wherever feels useful.
         </p>
 
         <div class="questions">
             <div class="question">
-                <div class="question-label">Opening</div>
-                <div class="question-text">Where do you think you are in the stages of change right now? You don't need to commit to an answer.</div>
+                <div class="question-label">Surprise</div>
+                <div class="question-text">What was surprising about your access audit?</div>
+            </div>
+            <div class="question">
+                <div class="question-label">What's working</div>
+                <div class="question-text">Has anyone already put barriers in place? What worked? What didn't?</div>
             </div>
             <div class="question">
                 <div class="question-label">The cycle</div>
-                <div class="question-text">Can you recognize any part of the gambling cycle in your own experience? What part is most familiar?</div>
+                <div class="question-text">Have you experienced the shame-financial stress-gambling cycle? Financial stress creates shame. Shame is painful. Gambling relieves pain temporarily. More gambling creates more stress.</div>
             </div>
             <div class="question">
-                <div class="question-label">Function</div>
-                <div class="question-text">What does gambling do for you? What need does it meet?</div>
-                <div class="question-note">Make space for honest answers here. This is not a trick question.</div>
+                <div class="question-label">One barrier</div>
+                <div class="question-text">What's one barrier you could realistically implement this week? What stops you?</div>
+                <div class="question-note">Remember: numbers aren't judgments. They're information.</div>
             </div>
-            <div class="question">
-                <div class="question-label">High-risk</div>
-                <div class="question-text">What's one situation that makes it hardest to resist gambling?</div>
-            </div>
-            <div class="question">
-                <div class="question-label">Closing round</div>
-                <div class="question-text">What's one thing you want to understand better about your own relationship with gambling?</div>
-            </div>
-        </div>
-
-        <div class="callout">
-            <p>Go at whatever pace the group needs. Some questions may take more time than others. That's okay.</p>
         </div>
 
         <div class="page-nav">
-            <button onclick="showPage(2)">← Stages of Change</button>
-            <button onclick="showPage(4)">Closing →</button>
+            <button onclick="showPage(3)">&larr; Audit</button>
+            <button onclick="showPage(5)">Closing &rarr;</button>
         </div>
     </div>
 
@@ -847,32 +836,30 @@
             <div class="step">
                 <div class="step-num">1</div>
                 <div class="step-content">
-                    <div class="step-q">What's one thing from today that stuck with you?</div>
-                    <div class="step-hint">Something you heard, something you recognized, something that surprised you.</div>
+                    <div class="step-q">What's one access barrier you're going to implement this week?</div>
+                    <div class="step-hint">Be specific. Name the tool, the step, the action.</div>
                 </div>
             </div>
             <div class="step">
                 <div class="step-num">2</div>
                 <div class="step-content">
-                    <div class="step-q">What's one thing you want to pay attention to this week?</div>
-                    <div class="step-hint">A trigger, a pattern, a situation. Something concrete.</div>
+                    <div class="step-q">What's the hardest part about putting that barrier in place?</div>
+                    <div class="step-hint">Name the obstacle. It's easier to deal with when you can see it.</div>
                 </div>
             </div>
             <div class="step">
                 <div class="step-num">3</div>
                 <div class="step-content">
-                    <div class="step-q">How are you leaving compared to how you walked in?</div>
-                    <div class="step-hint">Different, the same, heavier, lighter. Whatever is honest.</div>
+                    <div class="step-q">Between-session task</div>
+                    <div class="step-hint">Do the thing. Install Gamban. Delete the app. Set up the alert. Tell someone. One concrete action.</div>
                 </div>
             </div>
         </div>
 
         <div class="callout warm" style="margin-top: 2rem;">
-            <div class="callout-label">Facilitator note</div>
+            <div class="callout-label">The bottom line</div>
             <p>
-                Understanding the problem is not the same as solving it.
-                But you cannot find your way through something you haven't named.
-                You did that today.
+                An alcoholic doesn't keep whiskey on the counter and rely on willpower. This is the same principle. Barriers aren't weakness. They're strategy.
             </p>
         </div>
 
@@ -885,7 +872,7 @@
         </div>
 
         <div class="page-nav">
-            <button onclick="showPage(3)">← Discussion</button>
+            <button onclick="showPage(4)">&larr; Discussion</button>
             <button onclick="showPage(0)">Start over</button>
         </div>
     </div>
@@ -893,8 +880,8 @@
 
     <div class="footer">
         <strong>Support is always available</strong><br>
-        National Problem Gambling Helpline: <strong>1-800-522-4700</strong> · Text: <strong>HELPLINE to 233777</strong><br>
-        Crisis Text Line: text HOME to 741741 · 988 Lifeline: call or text 988
+        National Problem Gambling Helpline: <strong>1-800-522-4700</strong> &middot; Text: <strong>HELPLINE to 233777</strong><br>
+        Crisis Text Line: text HOME to 741741 &middot; 988 Lifeline: call or text 988
     </div>
 
 </div>
@@ -909,19 +896,18 @@
     function chainStep(i, el) {
         document.querySelectorAll('.chain-step').forEach(s => s.classList.remove('active'));
         el.classList.add('active');
-        for (let j = 0; j < 6; j++) document.getElementById('cd' + j).classList.toggle('active', j === i);
+        document.querySelectorAll('.chain-detail').forEach((d, j) => d.classList.toggle('active', j === i));
     }
 
     function stageStep(i, el) {
         document.querySelectorAll('.stage-step').forEach(s => s.classList.remove('active'));
         el.classList.add('active');
-        for (let j = 0; j < 5; j++) document.getElementById('sd' + j).classList.toggle('active', j === i);
+        document.querySelectorAll('.stage-detail').forEach((d, j) => d.classList.toggle('active', j === i));
     }
 
     function toggleAcc(header) {
         header.closest('.acc-item').classList.toggle('open');
     }
-
 </script>
 </body>
 </html>

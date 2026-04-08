@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Understanding the Problem — GEAR Program</title>
+    <title>Triggers and High-Risk Situations — GEAR Program</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -37,6 +37,34 @@
             display: block;
             height: 3px;
             background: var(--accent);
+        }
+
+        /* ---- Session Nav ---- */
+        .session-nav {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 0.5rem 1.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            white-space: nowrap;
+            text-align: center;
+        }
+        .session-nav a {
+            display: inline-block;
+            font-family: inherit;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--text-3);
+            text-decoration: none;
+            padding: 0.4rem 0.6rem;
+            border-radius: 4px;
+            transition: color 0.15s, background 0.15s;
+        }
+        .session-nav a:hover { color: var(--text-2); background: var(--bg); }
+        .session-nav a.active {
+            color: var(--accent);
+            font-weight: 600;
+            background: var(--accent-bg);
         }
 
         .container {
@@ -169,13 +197,14 @@
             margin-bottom: 0.4rem;
         }
         .callout.warm .callout-label { color: var(--accent); }
+        .callout.cool .callout-label { color: var(--cool); }
         .callout p {
             font-size: 0.9rem;
             color: var(--text-2);
             line-height: 1.7;
         }
 
-        /* ---- Gambling Cycle Chain ---- */
+        /* ---- Chain ---- */
         .chain {
             display: flex;
             align-items: center;
@@ -279,7 +308,7 @@
             position: relative;
         }
         .acc-body ul li::before {
-            content: '·';
+            content: '\00B7';
             position: absolute;
             left: 0;
             color: var(--text-3);
@@ -407,6 +436,36 @@
             margin-top: 0.3rem;
         }
 
+        /* ---- Trigger Map ---- */
+        .trigger-map {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+        .trigger-quadrant {
+            background: var(--surface);
+            padding: 1.25rem;
+        }
+        .trigger-quadrant-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        .trigger-quadrant p {
+            font-size: 0.85rem;
+            color: var(--text-3);
+            line-height: 1.6;
+            font-style: italic;
+        }
+
         /* ---- Page nav ---- */
         .page-nav {
             display: flex;
@@ -442,34 +501,6 @@
         }
         .footer strong { color: var(--text-2); font-weight: 600; }
 
-        /* ---- Session Nav ---- */
-        .session-nav {
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            padding: 0.5rem 1.5rem;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            white-space: nowrap;
-            text-align: center;
-        }
-        .session-nav a {
-            display: inline-block;
-            font-family: inherit;
-            font-size: 0.72rem;
-            font-weight: 500;
-            color: var(--text-3);
-            text-decoration: none;
-            padding: 0.4rem 0.6rem;
-            border-radius: 4px;
-            transition: color 0.15s, background 0.15s;
-        }
-        .session-nav a:hover { color: var(--text-2); background: var(--bg); }
-        .session-nav a.active {
-            color: var(--accent);
-            font-weight: 600;
-            background: var(--accent-bg);
-        }
-
         /* ---- Responsive ---- */
         @media (max-width: 600px) {
             .container { padding: 2rem 1.25rem 3rem; }
@@ -478,6 +509,7 @@
             .chain-step, .stage-step { border-right: none; border-bottom: 1px solid var(--border); }
             .chain-step:last-child, .stage-step:last-child { border-bottom: none; }
             .chain-detail, .stage-detail { border-radius: 0 0 8px 8px; }
+            .trigger-map { grid-template-columns: 1fr; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -488,10 +520,10 @@
 <body>
 
 <nav class="session-nav">
-    <a href="index.html" class="active">Session 1</a>
+    <a href="index.html">Session 1</a>
     <a href="session-2.html">Session 2</a>
     <a href="session-3.html">Session 3</a>
-    <a href="session-4.html">Session 4</a>
+    <a href="session-4.html" class="active">Session 4</a>
     <a href="session-5.html">Session 5</a>
     <a href="session-6.html">Session 6</a>
     <a href="session-7.html">Session 7</a>
@@ -503,50 +535,30 @@
 <div class="container">
 
     <header class="header">
-        <div class="header-label">Gambling Group — Single Session</div>
-        <h1>Understanding<br>the Problem</h1>
-        <p class="subtitle">GEAR Program — Gambling Evaluation and Reduction</p>
+        <div class="header-label">Gambling Group — Session 4</div>
+        <h1>Triggers &amp;<br>High-Risk Situations</h1>
+        <p class="subtitle">GEAR Program — Building Your Trigger Map</p>
     </header>
 
     <nav class="nav">
-        <button class="active" onclick="showPage(0, this)">Welcome</button>
-        <button onclick="showPage(1, this)">Understanding</button>
-        <button onclick="showPage(2, this)">Stages of Change</button>
-        <button onclick="showPage(3, this)">Discussion</button>
-        <button onclick="showPage(4, this)">Closing</button>
+        <button class="active" onclick="showPage(0, this)">Check-In</button>
+        <button onclick="showPage(1, this)">The 4 Categories</button>
+        <button onclick="showPage(2, this)">Cognitive Distortions</button>
+        <button onclick="showPage(3, this)">Trigger Map</button>
+        <button onclick="showPage(4, this)">Discussion</button>
+        <button onclick="showPage(5, this)">Closing</button>
     </nav>
 
 
-    <!-- ======================== WELCOME ======================== -->
+    <!-- ======================== CHECK-IN ======================== -->
     <div class="page active">
 
-        <div class="section-label warm">Welcome</div>
-        <h2><span class="timing">8 to 10 min</span>About today's group</h2>
-        <p class="body-text">
-            This group is about understanding gambling. Not judging where you are with it.
-            Wherever you are in your relationship with gambling is a valid starting point.
-        </p>
-        <p class="body-text">
-            We'll look at what gambling does, how it works, and what change actually looks like.
-            That includes looking honestly at patterns, without shame attached.
-            Understanding comes first. That's the work today.
-        </p>
-
-        <div class="callout warm" style="margin-top: 1.5rem;">
-            <div class="callout-label">Confidentiality</div>
-            <p>
-                What's shared here stays here. Everything in this group is confidential.
-                Names, stories, amounts, situations — all protected.
-                The one exception is safety. Outside of that, this is a safe space to be honest.
-            </p>
-        </div>
-
-        <hr class="divider">
-
-        <div class="section-label">Check-in</div>
+        <div class="section-label warm">Check-In</div>
         <h2><span class="timing">8 to 10 min</span>Getting into it</h2>
-        <p class="body-text" style="margin-top: 0.25rem;">
-            Share your name, then answer each of these. A sentence or two is fine.
+        <p class="body-text">
+            Last session we talked about pathways — the big picture of how gambling problems develop.
+            Today we zoom in. Every gambling episode has a trigger. But triggers aren't random. They fall into patterns.
+            Once you know your patterns, you have a decision point before the cycle starts. That's where the real leverage is.
         </p>
 
         <div class="steps">
@@ -560,233 +572,250 @@
             <div class="step">
                 <div class="step-num">2</div>
                 <div class="step-content">
-                    <div class="step-q">When was the last time gambling crossed your mind?</div>
-                    <div class="step-hint">A thought, an urge, a memory, seeing an ad. Whatever it was.</div>
+                    <div class="step-q">Did you notice whether your urges felt more like excitement-seeking, emotional escape, or impulsive action?</div>
+                    <div class="step-hint">That was last week's between-session task. What did you find?</div>
                 </div>
             </div>
             <div class="step">
                 <div class="step-num">3</div>
                 <div class="step-content">
-                    <div class="step-q">What do you want to get out of today?</div>
-                    <div class="step-hint">Understanding, connection, something specific. Say what's true.</div>
+                    <div class="step-q">Any gambling behavior or close calls this week?</div>
+                    <div class="step-hint">No judgment. Just naming what happened.</div>
                 </div>
             </div>
         </div>
 
         <div class="page-nav">
             <button class="ghost">← Back</button>
-            <button onclick="showPage(1)">Understanding →</button>
+            <button onclick="showPage(1)">The 4 Categories →</button>
         </div>
     </div>
 
 
-    <!-- ======================== UNDERSTANDING THE PROBLEM ======================== -->
+    <!-- ======================== THE 4 CATEGORIES ======================== -->
     <div class="page">
 
-        <div class="section-label warm">The Gambling Cycle</div>
-        <h2><span class="timing">15 to 20 min</span>How it actually works</h2>
+        <div class="section-label warm">Psychoeducation</div>
+        <h2><span class="timing">12 to 15 min</span>The 4 high-risk categories</h2>
         <p class="body-text">
-            Most gambling problems follow a recognizable cycle. Each step feeds the next.
-            Click any step to see how it works.
+            Every gambling episode starts somewhere. The trigger might feel random in the moment, but triggers fall into predictable categories. Knowing your categories gives you a decision point before the cycle starts.
+            Click each category to explore it.
         </p>
 
         <div class="chain">
             <div class="chain-step active" onclick="chainStep(0, this)">
                 <div class="chain-num">01</div>
-                <div class="chain-name">Trigger</div>
+                <div class="chain-name">Emotions</div>
             </div>
             <div class="chain-step" onclick="chainStep(1, this)">
                 <div class="chain-num">02</div>
-                <div class="chain-name">Urge</div>
+                <div class="chain-name">Environments</div>
             </div>
             <div class="chain-step" onclick="chainStep(2, this)">
                 <div class="chain-num">03</div>
-                <div class="chain-name">Gambling</div>
+                <div class="chain-name">Thoughts</div>
             </div>
             <div class="chain-step" onclick="chainStep(3, this)">
                 <div class="chain-num">04</div>
-                <div class="chain-name">Relief</div>
-            </div>
-            <div class="chain-step" onclick="chainStep(4, this)">
-                <div class="chain-num">05</div>
-                <div class="chain-name">Consequences</div>
-            </div>
-            <div class="chain-step" onclick="chainStep(5, this)">
-                <div class="chain-num">06</div>
-                <div class="chain-name">Shame</div>
+                <div class="chain-name">Access</div>
             </div>
         </div>
 
         <div class="chain-detail active" id="cd0">
-            <p><strong>Stress, boredom, excitement, financial pressure.</strong> Something happens that activates the pattern. It can be external (a bad day, unexpected money) or internal (loneliness, restlessness). This is the entry point.</p>
-            <div class="chain-example">You get paid. Or you have a fight with someone. Or you're just sitting with nothing to do.</div>
+            <p><strong>Emotional states.</strong> Stress, loneliness, boredom, celebration, anger, shame, anxiety, feeling empty. Both negative and positive emotions can trigger gambling.</p>
+            <p>HALT is a useful shorthand: <strong>Hungry, Angry, Lonely, Tired.</strong> These states lower your resistance to any impulse. They don't cause gambling, but they set the table for it.</p>
+            <p>If you identified with Pathway 2 last session, emotions are likely your primary trigger category. The gambling isn't about gambling — it's about the emotion driving it.</p>
+            <div class="chain-example">"I wasn't even thinking about it. But I had a terrible day, and before I knew it, the app was open."</div>
         </div>
         <div class="chain-detail" id="cd1">
-            <p><strong>The pull toward gambling builds.</strong> It might start as a thought, a memory of a win, or just a restless feeling. The urge is not a choice. It's wired into the pattern. The choice comes later.</p>
-            <div class="chain-example">"Just a quick one." "I'll set a limit this time." "I can feel it — tonight's the night."</div>
+            <p><strong>Environments.</strong> Certain places, times, people, and digital spaces. Casinos, bars, gas stations with lottery. After work, late at night, payday, weekends. Gambling friends, certain social groups.</p>
+            <p>Digital environments are especially powerful now: sports betting apps, push notifications, social media gambling content, fantasy sports platforms. Your phone is an environment too.</p>
+            <div class="chain-example">"Every Friday at 5pm it hits. I drive past the casino on my way home and it's like my brain turns on."</div>
         </div>
         <div class="chain-detail" id="cd2">
-            <p><strong>The behavior happens.</strong> Once in, the rules you set tend to dissolve. Chasing losses kicks in. Time distortion. The brain is getting intermittent reinforcement — near-misses are more activating than wins.</p>
-            <div class="chain-example">You said $50. It became $200. You won some back, then lost more trying to get even.</div>
+            <p><strong>Thoughts and cognitive distortions.</strong> These are the stories your mind tells you that make gambling feel rational, justified, or inevitable. They're covered in detail on the next tab.</p>
+            <p>The big ones: believing you have a system, thinking past results predict future ones, counting near-misses as almost-wins, and minimizing the stakes.</p>
+            <div class="chain-example">"I just had this feeling. Like tonight was going to be different. I know it sounds irrational now, but in the moment it felt real."</div>
         </div>
         <div class="chain-detail" id="cd3">
-            <p><strong>Short-term relief or a win.</strong> Something feels better, briefly. The tension drops. This is what the brain remembers. Even a loss can bring relief — at least the waiting is over.</p>
-            <div class="chain-example">For a moment, everything else disappears. The bills, the anxiety, the boredom. Just the game.</div>
-        </div>
-        <div class="chain-detail" id="cd4">
-            <p><strong>Financial, relational, emotional.</strong> The costs show up. Money gone. Time gone. Promises broken. Sometimes consequences are immediate. Sometimes they accumulate quietly.</p>
-            <div class="chain-example">Checking your balance the next morning. Lying about where you were. The slow erosion of trust.</div>
-        </div>
-        <div class="chain-detail" id="cd5">
-            <p><strong>Shame or stress feeds directly into the next trigger.</strong> The cycle closes. Guilt, self-criticism, or the stress of consequences becomes the very thing that activates the pattern again. This is why the cycle is hard to break from the inside.</p>
-            <div class="chain-example">"I'm never going to change." That thought itself becomes the next trigger.</div>
+            <p><strong>Access.</strong> Having money available — payday, bonus, tax refund, gift. Having apps on the phone. Being near venues. Not having barriers in place.</p>
+            <p>Access is the one category you can control structurally. You can't always control your emotions or your thoughts. You can control whether you have a betting app on your phone, whether your paycheck goes into an account someone else manages, whether you've self-excluded from venues.</p>
+            <div class="chain-example">"I deleted the apps three times. But I never did the self-exclusion. So when the urge hit, I just re-downloaded."</div>
         </div>
 
-        <div class="callout" style="margin-top: 0.5rem;">
-            <p>The cycle isn't weakness. It's a pattern, and patterns can change. Recognizing the cycle is the first step.</p>
-        </div>
-
-        <hr class="divider">
-
-        <div class="section-label">Key concepts</div>
-        <h2>Building blocks</h2>
-
-        <div class="accordion">
-            <div class="acc-item open">
-                <div class="acc-header" onclick="toggleAcc(this)">
-                    <div class="acc-title">What is GEAR?</div>
-                    <div class="acc-icon">+</div>
-                </div>
-                <div class="acc-body">
-                    <p><strong>GEAR</strong> stands for Gambling Evaluation and Reduction Program. It's a structured way to understand and change gambling behavior. What makes it different: it starts with honest assessment before strategies.</p>
-                    <p>You can't find a route out of something you haven't mapped. The work in GEAR begins with looking clearly at what's actually happening, without layering shame on top of it.</p>
-                </div>
-            </div>
-            <div class="acc-item">
-                <div class="acc-header" onclick="toggleAcc(this)">
-                    <div class="acc-title">High-risk situations</div>
-                    <div class="acc-icon">+</div>
-                </div>
-                <div class="acc-body">
-                    <p>GEAR identifies four categories of personal high-risk situations.</p>
-                    <ul>
-                        <li><strong>Emotional states</strong> — stress, loneliness, celebration, boredom</li>
-                        <li><strong>Environments</strong> — certain places, times of day, particular people</li>
-                        <li><strong>Thoughts</strong> — "just this once," "I can win it back," "I deserve this"</li>
-                        <li><strong>Access</strong> — having money available, apps on the phone, ease of getting in</li>
-                    </ul>
-                    <div class="aside">Knowing your triggers gives you a decision point before the cycle starts. That's where the real leverage is.</div>
-                </div>
-            </div>
-            <div class="acc-item">
-                <div class="acc-header" onclick="toggleAcc(this)">
-                    <div class="acc-title">The function of gambling</div>
-                    <div class="acc-icon">+</div>
-                </div>
-                <div class="acc-body">
-                    <p>Gambling serves a function for most people. Escape. Excitement. Numbing. Social connection. Financial hope.</p>
-                    <p>Understanding what gambling does for you — not just what it costs you — is essential. That's not a trick question. It's an honest one.</p>
-                    <div class="aside">Recovery isn't about removing something without a replacement. It's about understanding the underlying need, and finding different ways to meet it.</div>
-                </div>
-            </div>
-            <div class="acc-item">
-                <div class="acc-header" onclick="toggleAcc(this)">
-                    <div class="acc-title">Honest assessment</div>
-                    <div class="acc-icon">+</div>
-                </div>
-                <div class="acc-body">
-                    <p>GEAR uses structured self-assessment to help people understand the full picture: how often, how much, and what impact.</p>
-                    <p>This is about clarity, not shame. Numbers and patterns aren't judgments. They're information.</p>
-                    <div class="aside">You cannot find a path through something you haven't named. Honest assessment is how you name it, on your own terms.</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page-nav">
-            <button onclick="showPage(0)">← Welcome</button>
-            <button onclick="showPage(2)">Stages of Change →</button>
-        </div>
-    </div>
-
-
-    <!-- ======================== STAGES OF CHANGE ======================== -->
-    <div class="page">
-
-        <div class="section-label cool">Stages of Change</div>
-        <h2><span class="timing">12 to 15 min</span>Where are you right now?</h2>
-        <p class="body-text">
-            The Stages of Change model (Prochaska and DiClemente) shows that change happens in stages, not all at once.
-            Knowing your stage helps you use the right tools.
-            There's no stage that means you're behind.
-        </p>
-
-        <div class="stage-chain">
-            <div class="stage-step active" onclick="stageStep(0, this)">
-                <div class="stage-num">01</div>
-                <div class="stage-name">Pre-contemplation</div>
-            </div>
-            <div class="stage-step" onclick="stageStep(1, this)">
-                <div class="stage-num">02</div>
-                <div class="stage-name">Contemplation</div>
-            </div>
-            <div class="stage-step" onclick="stageStep(2, this)">
-                <div class="stage-num">03</div>
-                <div class="stage-name">Preparation</div>
-            </div>
-            <div class="stage-step" onclick="stageStep(3, this)">
-                <div class="stage-num">04</div>
-                <div class="stage-name">Action</div>
-            </div>
-            <div class="stage-step" onclick="stageStep(4, this)">
-                <div class="stage-num">05</div>
-                <div class="stage-name">Maintenance</div>
-            </div>
-        </div>
-
-        <div class="stage-detail active" id="sd0">
-            <p><strong>"I don't have a problem"</strong> or <strong>"I'm not ready."</strong></p>
-            <p>People here aren't necessarily in denial. They may genuinely not see the problem yet. Or they see it and don't feel ready to do anything about it. Both are real. Both are common.</p>
-            <p>Meeting someone in this stage means not pushing. It means offering information without pressure, staying curious. Pressure tends to backfire here.</p>
-        </div>
-        <div class="stage-detail" id="sd1">
-            <p><strong>"Maybe I have a problem, but I'm not sure I want to change."</strong></p>
-            <p>This is where ambivalence lives. Both sides are real at the same time: what gambling gives you, and what it costs you. That tension is uncomfortable, and it makes sense.</p>
-            <p>This stage can last a long time. That's normal. The goal here isn't resolution. It's honest exploration of both sides.</p>
-        </div>
-        <div class="stage-detail" id="sd2">
-            <p><strong>"I'm getting ready to do something."</strong></p>
-            <p>Starting to gather information, make small changes, or tell someone what's going on. The decision to change has been made. The plan is still forming.</p>
-            <p>The work here is planning. What would change look like for you, specifically? For your life, your triggers, your needs — not change in general.</p>
-        </div>
-        <div class="stage-detail" id="sd3">
-            <p><strong>Actively making changes.</strong></p>
-            <p>Reducing or stopping gambling. Using new coping strategies. Rebuilding finances, relationships, or daily routines.</p>
-            <p>This stage requires the most energy and the most support. It's also where the work becomes most visible to others. External support matters a great deal here.</p>
-        </div>
-        <div class="stage-detail" id="sd4">
-            <p><strong>Sustaining change over time.</strong></p>
-            <p>This is where relapse prevention becomes the main focus. High-risk situations don't disappear. They require ongoing awareness.</p>
-            <p>Most people move through these stages more than once. That's not failure. That's how change actually works. Each cycle builds understanding. Understanding builds durability.</p>
-        </div>
-
-        <hr class="divider">
-
-        <div class="section-label cool">Reflection</div>
-        <h2>Where are you today?</h2>
-        <p class="body-text">
-            This is just for you. You don't need to commit to an answer, and it can change from day to day.
-        </p>
-
-        <div class="callout cool" style="margin-top: 1rem;">
+        <div class="callout warm">
+            <div class="callout-label">Key point</div>
             <p>
-                Being here, even without a plan to change, is worth something.
-                A lot of understanding starts right here. Gathering information is its own form of movement.
+                Triggers are not choices. They're conditioned responses. The choice comes after the trigger — in how you respond.
+                But you can only choose differently if you see the trigger coming. That's what this session is about.
             </p>
         </div>
 
         <div class="page-nav">
-            <button onclick="showPage(1)">← Understanding</button>
-            <button onclick="showPage(3)">Discussion →</button>
+            <button onclick="showPage(0)">← Check-In</button>
+            <button onclick="showPage(2)">Cognitive Distortions →</button>
+        </div>
+    </div>
+
+
+    <!-- ======================== COGNITIVE DISTORTIONS ======================== -->
+    <div class="page">
+
+        <div class="section-label warm">Thinking Traps</div>
+        <h2><span class="timing">8 to 10 min</span>The lies gambling tells</h2>
+        <p class="body-text">
+            Cognitive distortions are predictable thinking errors that gambling exploits. They're not signs of being irrational — they're built into how human brains process uncertainty. Gambling machines and platforms are designed to trigger them.
+        </p>
+
+        <div class="accordion">
+            <div class="acc-item open">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">Illusion of control</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p><strong>"I can feel when a win is coming." "I have a system."</strong></p>
+                    <p>This is the defining cognitive distortion of gambling. People behave as if they can influence random outcomes when given choice, competition, or familiarity cues. Every gambling machine is designed to exploit this — letting you choose numbers, pull the lever, pick your bet.</p>
+                    <div class="aside">The outcome is random. Your sense of control is manufactured. That's not a failure on your part — it's a feature of the game's design.</div>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">Gambler's fallacy</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p><strong>"It's been red five times — it has to be black next."</strong></p>
+                    <p>Each event is independent. The roulette wheel doesn't remember what happened last spin. But your brain wants to find patterns, even in randomness. It's wired that way. And gambling exploits that wiring.</p>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">Biased attribution</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p><strong>Wins are skill. Losses are bad luck.</strong></p>
+                    <p>When you win, it confirms your strategy. When you lose, it's a fluke. This asymmetry keeps you believing that you have an edge, even when the math says otherwise. Over time, it builds a distorted picture of your actual results.</p>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">Near-miss reframing</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p><strong>"I almost won."</strong></p>
+                    <p>You didn't almost win. You lost. But near-misses activate the same reward pathways as actual wins. Your brain processes them as evidence that you're close — which keeps you playing. Slot machines are engineered to produce near-misses at a much higher rate than chance would predict.</p>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">Chasing justification</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p><strong>"I just need to win back what I lost."</strong></p>
+                    <p>This is the escalation trap. You're no longer gambling for fun or excitement — you're gambling to undo the damage gambling already caused. The math doesn't support it. But the emotional logic is compelling: "If I stop now, the loss is permanent."</p>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <div class="acc-title">Minimization</div>
+                    <div class="acc-icon">+</div>
+                </div>
+                <div class="acc-body">
+                    <p><strong>"It's just $20." "Everyone does it." "I can stop whenever I want."</strong></p>
+                    <p>Minimization keeps the behavior feeling manageable. It reduces the perceived stakes so that the decision to gamble doesn't feel like a real decision. By the time you notice the accumulation, you're already deep in.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout cool">
+            <div class="callout-label">The first intervention</div>
+            <p>
+                You don't have to fight a distortion. You just have to name it.
+                "That's the illusion of control." "That's chasing." Naming it creates a gap between the thought and the behavior.
+                In that gap is where the choice lives.
+            </p>
+        </div>
+
+        <div class="page-nav">
+            <button onclick="showPage(1)">← The 4 Categories</button>
+            <button onclick="showPage(3)">Trigger Map →</button>
+        </div>
+    </div>
+
+
+    <!-- ======================== TRIGGER MAP ======================== -->
+    <div class="page">
+
+        <div class="section-label cool">Exercise</div>
+        <h2><span class="timing">10 to 12 min</span>Build your trigger map</h2>
+        <p class="body-text">
+            Use the four categories to map your personal triggers. Be specific. "Stress" isn't specific enough — what kind of stress? Work stress? Financial stress? Relationship conflict?
+            The more specific you are, the more useful this map becomes.
+        </p>
+
+        <div class="trigger-map">
+            <div class="trigger-quadrant">
+                <div class="trigger-quadrant-label">Emotional Triggers</div>
+                <p>What feelings make you most vulnerable? Be specific about the type of stress, sadness, boredom, or excitement.</p>
+            </div>
+            <div class="trigger-quadrant">
+                <div class="trigger-quadrant-label">Environmental Triggers</div>
+                <p>Places, times of day, people, digital spaces. Where and when are you most at risk?</p>
+            </div>
+            <div class="trigger-quadrant">
+                <div class="trigger-quadrant-label">Cognitive Triggers</div>
+                <p>Which thinking traps catch you most? What does the voice in your head say right before you gamble?</p>
+            </div>
+            <div class="trigger-quadrant">
+                <div class="trigger-quadrant-label">Access Triggers</div>
+                <p>Money availability, apps, proximity to venues. What makes it easy to act on an urge?</p>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="section-label">Follow-up</div>
+        <h2>Look at your map</h2>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <div class="step-q">Which quadrant has the most triggers?</div>
+                    <div class="step-hint">That tells you something about your pattern. Emotional? Environmental? Cognitive? Access?</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <div class="step-q">Which trigger is the most dangerous?</div>
+                    <div class="step-hint">Not the most frequent — the one most likely to lead to actual gambling. The one where you're in the most trouble.</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <div class="step-q">Are there triggers you didn't realize were triggers until you wrote them down?</div>
+                    <div class="step-hint">That's the point of the exercise. Awareness is the first intervention.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout warm" style="margin-top: 1.5rem;">
+            <div class="callout-label">Triggers vs. urges</div>
+            <p>
+                The trigger is what happens. The urge is your response to it. We're mapping triggers — the things that set you up.
+                You can't always control the trigger. But knowing it's coming gives you a moment to choose what happens next.
+            </p>
+        </div>
+
+        <div class="page-nav">
+            <button onclick="showPage(2)">← Cognitive Distortions</button>
+            <button onclick="showPage(4)">Discussion →</button>
         </div>
     </div>
 
@@ -795,43 +824,35 @@
     <div class="page">
 
         <div class="section-label warm">Discussion</div>
-        <h2><span class="timing">20 to 25 min</span>Open it up</h2>
+        <h2><span class="timing">15 to 20 min</span>Open it up</h2>
         <p class="body-text">
             These questions are starting points. Take them wherever feels useful.
-            No answer is wrong. Take them wherever feels useful.
         </p>
 
         <div class="questions">
             <div class="question">
-                <div class="question-label">Opening</div>
-                <div class="question-text">Where do you think you are in the stages of change right now? You don't need to commit to an answer.</div>
+                <div class="question-label">Most dangerous</div>
+                <div class="question-text">What's your most dangerous trigger? The one that, when it hits, you're in the most trouble?</div>
             </div>
             <div class="question">
-                <div class="question-label">The cycle</div>
-                <div class="question-text">Can you recognize any part of the gambling cycle in your own experience? What part is most familiar?</div>
+                <div class="question-label">Thinking traps</div>
+                <div class="question-text">Has anyone noticed a cognitive distortion in their own thinking? Which one? What does it sound like in your head?</div>
             </div>
             <div class="question">
-                <div class="question-label">Function</div>
-                <div class="question-text">What does gambling do for you? What need does it meet?</div>
-                <div class="question-note">Make space for honest answers here. This is not a trick question.</div>
+                <div class="question-label">Chain reactions</div>
+                <div class="question-text">Do any of your triggers connect to each other? For example: an emotional trigger leads to a cognitive distortion, which leads to accessing gambling.</div>
+                <div class="question-note">Triggers rarely act alone. They chain together. Seeing the chain is powerful.</div>
             </div>
             <div class="question">
-                <div class="question-label">High-risk</div>
-                <div class="question-text">What's one situation that makes it hardest to resist gambling?</div>
+                <div class="question-label">One thing</div>
+                <div class="question-text">What's one trigger you could do something about this week?</div>
+                <div class="question-note">Not all of them. Just one. What's the most actionable?</div>
             </div>
-            <div class="question">
-                <div class="question-label">Closing round</div>
-                <div class="question-text">What's one thing you want to understand better about your own relationship with gambling?</div>
-            </div>
-        </div>
-
-        <div class="callout">
-            <p>Go at whatever pace the group needs. Some questions may take more time than others. That's okay.</p>
         </div>
 
         <div class="page-nav">
-            <button onclick="showPage(2)">← Stages of Change</button>
-            <button onclick="showPage(4)">Closing →</button>
+            <button onclick="showPage(3)">← Trigger Map</button>
+            <button onclick="showPage(5)">Closing →</button>
         </div>
     </div>
 
@@ -847,32 +868,32 @@
             <div class="step">
                 <div class="step-num">1</div>
                 <div class="step-content">
-                    <div class="step-q">What's one thing from today that stuck with you?</div>
-                    <div class="step-hint">Something you heard, something you recognized, something that surprised you.</div>
+                    <div class="step-q">What's one trigger you want to watch for this week?</div>
+                    <div class="step-hint">Pick the one that feels most important right now.</div>
                 </div>
             </div>
             <div class="step">
                 <div class="step-num">2</div>
                 <div class="step-content">
-                    <div class="step-q">What's one thing you want to pay attention to this week?</div>
-                    <div class="step-hint">A trigger, a pattern, a situation. Something concrete.</div>
+                    <div class="step-q">What would catching it early look like?</div>
+                    <div class="step-hint">What's the signal before the signal? The early warning that the trigger is activating.</div>
                 </div>
             </div>
             <div class="step">
                 <div class="step-num">3</div>
                 <div class="step-content">
-                    <div class="step-q">How are you leaving compared to how you walked in?</div>
-                    <div class="step-hint">Different, the same, heavier, lighter. Whatever is honest.</div>
+                    <div class="step-q">Between-session task</div>
+                    <div class="step-hint">When you notice a trigger this week, don't try to stop it. Just name it. "That's an emotional trigger." "That's the illusion of control." Naming is the first intervention.</div>
                 </div>
             </div>
         </div>
 
         <div class="callout warm" style="margin-top: 2rem;">
-            <div class="callout-label">Facilitator note</div>
+            <div class="callout-label">The takeaway</div>
             <p>
-                Understanding the problem is not the same as solving it.
-                But you cannot find your way through something you haven't named.
-                You did that today.
+                You can't control whether triggers happen. But you can learn to see them coming.
+                Predictive awareness — knowing where you're vulnerable before you're in the situation — is one of the most powerful tools in recovery.
+                Today you started building that awareness.
             </p>
         </div>
 
@@ -885,7 +906,7 @@
         </div>
 
         <div class="page-nav">
-            <button onclick="showPage(3)">← Discussion</button>
+            <button onclick="showPage(4)">← Discussion</button>
             <button onclick="showPage(0)">Start over</button>
         </div>
     </div>
@@ -909,19 +930,12 @@
     function chainStep(i, el) {
         document.querySelectorAll('.chain-step').forEach(s => s.classList.remove('active'));
         el.classList.add('active');
-        for (let j = 0; j < 6; j++) document.getElementById('cd' + j).classList.toggle('active', j === i);
-    }
-
-    function stageStep(i, el) {
-        document.querySelectorAll('.stage-step').forEach(s => s.classList.remove('active'));
-        el.classList.add('active');
-        for (let j = 0; j < 5; j++) document.getElementById('sd' + j).classList.toggle('active', j === i);
+        for (let j = 0; j < 4; j++) document.getElementById('cd' + j).classList.toggle('active', j === i);
     }
 
     function toggleAcc(header) {
         header.closest('.acc-item').classList.toggle('open');
     }
-
 </script>
 </body>
 </html>
