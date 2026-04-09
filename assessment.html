@@ -837,6 +837,36 @@ function showResults() {
 
     // Store for copy
     window._gearResults = { bbgs, pgsi, func, path, recs };
+
+    // Send to Supabase webhook (non-blocking)
+    try {
+        const SUPABASE_WEBHOOK_URL = "https://oxabwsnqfqeyrpgjwnde.supabase.co/functions/v1/assessment-webhook";
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im94YWJ3c25xZnFleXJwZ2p3bmRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NjgwMjEsImV4cCI6MjA5MTI0NDAyMX0.0GLYB5eMkki0J42XpSNSjmwUR2iVP4VrxWKDxuOwh_0";
+        fetch(SUPABASE_WEBHOOK_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + SUPABASE_ANON_KEY,
+            },
+            body: JSON.stringify({
+                instrument: "gear",
+                client_name: "GEAR Participant",
+                scores: {
+                    bbgs_total: bbgs.total,
+                    bbgs_proceed: bbgs.proceed,
+                    pgsi_total: pgsi.total,
+                    pgsi_category: pgsi.category,
+                    functional_scores: func.scores,
+                    primary_function: func.primary,
+                    pathway_scores: path.scores,
+                    primary_pathway: path.primary,
+                },
+            }),
+        }).then(() => console.log("Supabase webhook sent"))
+          .catch(err => console.warn("Supabase webhook failed (non-blocking):", err));
+    } catch (err) {
+        console.warn("Supabase webhook failed:", err);
+    }
 }
 
 function copySummary() {
