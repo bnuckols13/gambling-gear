@@ -321,9 +321,28 @@ body::before { content: ''; display: block; height: 3px; background: var(--accen
             <div class="welcome-label">GEAR Program</div>
             <h1>Gambling Assessment</h1>
             <p class="subtitle">Understand your relationship with gambling — honestly, without judgment.</p>
-            <button class="start-btn" onclick="startAssessment()">Begin Assessment</button>
+            <button class="start-btn" onclick="show('intake')">Begin Assessment</button>
             <div class="conf">
-                <strong>About this assessment:</strong> This tool helps you and your counselor understand your gambling patterns, what function gambling serves for you, and what treatment approach fits best. It takes about 5-8 minutes. Your answers are not stored anywhere — they exist only in this browser session.
+                <strong>About this assessment:</strong> This tool helps you and your counselor understand your gambling patterns, what function gambling serves for you, and what treatment approach fits best. It takes about 5-8 minutes.
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════ INTAKE (name/email) ══════ -->
+    <div id="intake" class="screen">
+        <div class="welcome-card">
+            <div class="welcome-label">Before We Begin</div>
+            <h1>A Little About You</h1>
+            <p class="subtitle">This helps your counselor connect your results to your care plan.</p>
+            <div style="max-width: 400px; margin: 1.5rem auto; text-align: left;">
+                <label style="display:block; font-weight:600; margin-bottom:0.25rem; color:#1C1917;">Name <span style="color:#9A4A3A;">*</span></label>
+                <input type="text" id="gear-name" placeholder="Your name" style="width:100%; padding:0.75rem; border:1px solid #E7E5E4; border-radius:8px; font-size:1rem; margin-bottom:1rem; font-family:inherit;">
+                <label style="display:block; font-weight:600; margin-bottom:0.25rem; color:#1C1917;">Email <span style="color:#A8A29E; font-weight:400;">(optional)</span></label>
+                <input type="email" id="gear-email" placeholder="your@email.com" style="width:100%; padding:0.75rem; border:1px solid #E7E5E4; border-radius:8px; font-size:1rem; margin-bottom:1.5rem; font-family:inherit;">
+            </div>
+            <button class="start-btn" onclick="startAssessment()">Continue to Assessment</button>
+            <div class="conf" style="margin-top:1rem;">
+                Your name helps us personalize your results. Email is optional — if provided, we can send you a copy of your results and connect you with follow-up resources.
             </div>
         </div>
     </div>
@@ -616,6 +635,14 @@ function show(id) {
 }
 
 function startAssessment() {
+    const nameInput = document.getElementById('gear-name');
+    if (!nameInput.value.trim()) {
+        nameInput.style.borderColor = '#9A4A3A';
+        nameInput.focus();
+        return;
+    }
+    window._gearClientName = nameInput.value.trim();
+    window._gearClientEmail = (document.getElementById('gear-email').value || '').trim();
     show('assessment');
     currentStep = 0; currentQ = 0;
     bbgsAnswers = []; pgsiAnswers = []; funcAnswers = []; pathAnswers = [];
@@ -850,7 +877,8 @@ function showResults() {
             },
             body: JSON.stringify({
                 instrument: "gear",
-                client_name: "GEAR Participant",
+                client_name: window._gearClientName || "GEAR Participant",
+                email: window._gearClientEmail || undefined,
                 scores: {
                     bbgs_total: bbgs.total,
                     bbgs_proceed: bbgs.proceed,
